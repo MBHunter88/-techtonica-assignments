@@ -63,6 +63,22 @@ const battlegroundsCards = [
         attack: 3,
         health: 6,
         abilities: ["Deathrattle: Summon two friendly Mechs that died this combat."]
+    },
+    {
+        id: 9,
+        name: "Voidlord",
+        tier: 6,
+        attack: 3,
+        health: 9,
+        abilities: ["Taunt", "Deathrattle: Summon three 1/3 Demons with Taunt."]
+    },
+    {
+        id: 10,
+        name: "Pogo-Hopper",
+        tier: 2,
+        attack: 1,
+        health: 1,
+        abilities: ["Battlecry: Gain +2/+2 for each other Pogo-Hopper you played this game."]
     }
 ];
 
