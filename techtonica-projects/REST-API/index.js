@@ -1,9 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import data from './battlecards.js';
 import cors from 'cors';
 import battlegroundsCards from './battlecards.js';
+import dotenv from 'dotenv';
+import pkg from 'pg';
+const { Pool } = pkg;
 
+
+//use .env for variables
+dotenv.config();
 
 const app = express();
 const PORT = 5000;
@@ -17,6 +22,18 @@ app.use(bodyParser.urlencoded({ extended: true}));
 const urlencodedParser = bodyParser.urlencoded({ extended: false})
 
 
+//create new pool instance
+const pool = new Pool({
+    user: process.env.DB_USER,          
+    host: process.env.DB_HOST,          
+    database: process.env.DB_NAME,      
+    password: process.env.DB_PASSWORD,  
+    port: process.env.DB_PORT,    
+});
+
+//populate database with initial data from battlecards.js
+
+
 //create route for test "homepage"
 app.get('/', (req, res) => {
     res.json("My get route is working")
@@ -25,7 +42,7 @@ app.get('/', (req, res) => {
 
 //create endpoint for battlecards to print
 app.get('/battlecards', (req, res) => {
-    res.json(data)
+    res.json(battlegroundsCards)
 })
 
 //create POST route
@@ -78,12 +95,3 @@ app.delete('/battlecards/:id', (req, res) => {
 //
 app.listen(PORT, () => console.log(`Server is runnning on port http://localhost:${PORT}`))
 
-
-// {
-//     "id": 11,
-//     "name": "Rylak",
-//     "tier": 4,
-//     "attack": 4,
-//     "health": 3,
-//     "abilities": ["Trigger battlecry on adjacent minion."]
-// }
