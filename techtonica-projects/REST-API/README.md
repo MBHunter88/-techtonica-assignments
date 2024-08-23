@@ -102,3 +102,17 @@ Response: JSON object of the update battlecard.
 Delete battlecar by it's ID.
 Response: Message confirming deletion. 
 
+## Error Handling
+
+Returns HTTP status codes and error messages in case of invalid input or server errors. 
+
+## Future Plans
+
+### Adding Client-Side Application
+
+The plan is to develop a client side application that will interact with this API. The frontend application will provide user-friendly interface for interactind with the battlecards. Planned features include: 
+
+- **Battlecards Display**
+- **Create Custom Battlecard**
+- **Edit Existind Battlecards**
+- **Search and Filter through Battlecards**
