@@ -7,7 +7,7 @@ function Question() {
     //state management
     const [isAnswered, setIsAnswered] = useState(false)
     //Context management 
-    const { score, setScore, questions, currentQuestionIndex, setCurrentQuestionIndex } = useContext(AppContext)
+    const { score, setScore, questions, setGameState, currentQuestionIndex, setCurrentQuestionIndex } = useContext(AppContext)
 
     //shuffle array for questions/answers
     const shuffleArray = (array) => {
@@ -16,9 +16,14 @@ function Question() {
 
     //event handler to fetch next question
     const handleNextQuestion = () => {
+        if(currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
         setIsAnswered(false)
+        }
+     
     }
+
+  
 
     //current question based on index 
     const currentQuestion = questions[currentQuestionIndex]
@@ -45,7 +50,9 @@ function Question() {
             if (selectedAnswer === currentQuestion.correct_answer) {
                 setScore(score + 1)
             }
-
+            if(currentQuestionIndex === questions.length - 1) {
+                setTimeout(() => {setGameState('end')}, 2000)
+            }
         }
     }
 
@@ -71,7 +78,7 @@ function Question() {
                             </button>
                         ))}
                     </div>
-                    {currentQuestionIndex < questions.length - 1 && (
+                    {isAnswered && currentQuestionIndex < questions.length - 1 && (
                         <button className='next-question' onClick={handleNextQuestion}>Next Question</button>
                     )}
                     <div className='scoreBoard'>
