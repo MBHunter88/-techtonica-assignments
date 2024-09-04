@@ -24,10 +24,18 @@ function Question({ question, setQuestion }) {
     } 
   };
  
+  //event handler to generate questions 
   const handleClick =  () => {
     fetchQuestions()
   }
   
+  //shuffle array for answers
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5)
+  }
+
+  //combine correct and incorrect answers in array
+  const allAnswers = question ? shuffleArray([question.correct_answer, ...question.incorrect_answers]) : [];
 
   return (
     <>
@@ -36,9 +44,13 @@ function Question({ question, setQuestion }) {
       {question && (
        <div>
        <p><strong>Category:</strong> {question.category}</p>
-       <p><strong>Question:</strong> {question.question}</p>
+       <p><strong>Question:</strong> {question.question}</p> 
+       <div className='answers'>
+        {allAnswers.map((answer, index) => (
+        <button key={index}>{answer}</button>
+        ))}
+    </div>
      </div>
-        
       )}
     </>
   )

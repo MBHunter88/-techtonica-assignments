@@ -3,7 +3,7 @@ import Question from './components/Questions'
 import './App.css'
 
 function App() {
-const [question, setQuestion] = useState([])
+const [question, setQuestion] = useState(null)
 
 
   return (
