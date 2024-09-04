@@ -3,14 +3,14 @@ import Question from './components/Questions'
 import './App.css'
 
 function App() {
-const [question, setQuestion] = useState(null)
+
 
 
   return (
     <>
       <h1>Hello World!</h1>
       <div>
-      <Question question={question} setQuestion={setQuestion}/>
+      <Question />
       </div>
     </>
   )

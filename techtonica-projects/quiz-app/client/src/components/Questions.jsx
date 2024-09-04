@@ -3,8 +3,15 @@ import React, { useState } from 'react'
 
 //create a fetch request to generate questions to display 
 
-function Question({ question, setQuestion }) {
-  
+function Question() {
+    const [questions, setQuestions] = useState([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
+      //shuffle array for questions/answers
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5)
+  }
+
      //fetch trivia api 
   const fetchQuestions = async () => {
     try {
@@ -15,12 +22,14 @@ function Question({ question, setQuestion }) {
         throw new Error(`Error: ${response.status} ${response.statusText}`)
       }
       const data = await response.json();
-      const randomQuestion = data.results[Math.floor(Math.random() * data.results.length)]
-      setQuestion(randomQuestion); //updates questions from parsed data api request
-      console.log(randomQuestion)
+
+      const allQuestions = shuffleArray(data.results)
+      setQuestions(allQuestions); //updates questions from parsed data api request
+      setCurrentQuestionIndex(0)
+        console.log(allQuestions)
     } catch (error) {
       console.error('Error fetching trivia questions:', error);
-      setQuestion([]) //clears data on error
+      setQuestions([]) //clears data on error
     } 
   };
  
@@ -29,27 +38,33 @@ function Question({ question, setQuestion }) {
     fetchQuestions()
   }
   
-  //shuffle array for answers
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5)
-  }
+//event handler to fetch next question
+const handleNextQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
+}
+
+//current question based on index 
+const currentQuestion = questions[currentQuestionIndex]
 
   //combine correct and incorrect answers in array
-  const allAnswers = question ? shuffleArray([question.correct_answer, ...question.incorrect_answers]) : [];
+  const allAnswers = currentQuestion ? shuffleArray([currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]) : [];
 
   return (
     <>
      <h2>Trivia Question</h2>
-      <button onClick={handleClick}>Generate Questions</button>
-      {question && (
+     {questions.length === 0 && <button onClick={handleClick}>Generate Question</button>}
+      {currentQuestion && (
        <div>
-       <p><strong>Category:</strong> {question.category}</p>
-       <p><strong>Question:</strong> {question.question}</p> 
+       <p><strong>Category:</strong> {currentQuestion.category}</p>
+       <p><strong>Question:</strong> {currentQuestion.question}</p> 
        <div className='answers'>
         {allAnswers.map((answer, index) => (
         <button key={index}>{answer}</button>
         ))}
     </div>
+    {currentQuestionIndex < questions.length - 1 && (
+        <button onClick={handleNextQuestion}>Next Question</button>
+    )}
      </div>
       )}
     </>
