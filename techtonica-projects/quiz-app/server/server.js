@@ -39,3 +39,5 @@ app.get('/api/trivia', async (req, res) => {
 
 
 app.listen(PORT, () => console.log(`Server is runnning on port http://localhost:${PORT}`))
+
+export default app;
