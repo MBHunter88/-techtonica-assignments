@@ -12,29 +12,29 @@ function App() {
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
-  //fetch trivia api 
+  //fetch questions from trivia api 
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`/api/trivia`); //fetch data from server.js
-      console.log(response)
+
       //error handling to check for response from server
       if (!response.ok) { //if not ok (codes 200-299) throw error
         throw new Error(`Error: ${response.status} ${response.statusText}`)
       }
+
       const data = await response.json();
       setQuestions(data.results); //updates questions from parsed data api request
-      setCurrentQuestionIndex(0)
       console.log(data.results)
+      setCurrentQuestionIndex(0)
       setGameState('questions')
+
     } catch (error) {
       console.error('Error fetching trivia questions:', error);
       setQuestions([]) //clears data on error
     }
   };
 
-  const handleNextQuestion = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  }
+  //useContext hook to be able to share state across components
 
   return (
     <>
