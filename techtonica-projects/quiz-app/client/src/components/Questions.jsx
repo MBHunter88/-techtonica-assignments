@@ -73,6 +73,10 @@ function Question() {
                                 key={index}
                                 onClick={() => handleAnswerSelection(answer)}
                                 disabled={isAnswered}
+                                style={{
+                                    backgroundColor: isAnswered && answer === currentQuestion.correct_answer ? 'green' : '',
+                                    color: isAnswered && answer === currentQuestion.correct_answer ? 'white' : '',
+                                  }}
                             >
                                 {answer}
                             </button>

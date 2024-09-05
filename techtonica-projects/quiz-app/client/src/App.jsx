@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='app-container'>
         <h1>Trivia App</h1>
         <AppContext.Provider value={{
           gameState,

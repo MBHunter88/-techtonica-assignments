@@ -24,8 +24,8 @@ const results = () => {
     };
 
     return (
-        <div>
-            <h2>All Done!</h2>
+        <div className='end-screen'>
+            <h2>Results</h2>
             <h3>Your Score: {score} / {questions.length} </h3>
             <p>{results()}</p>
             <button onClick={restartGame}>Restart Game</button>
