@@ -54,6 +54,15 @@ function Question() {
             }
         }
     }
+
+    function decodeHtmlEntities(str) {
+        const txt = document.createElement("textarea");
+        txt.innerHTML = str;
+        return txt.value;
+      }
+      
+     
+      
     
     //Debugging id current question does not render
     if (!currentQuestion) return <p>Loading...</p>;
@@ -64,8 +73,8 @@ function Question() {
                 <div>
                     <h2>Trivia Question {currentQuestionIndex + 1} out of {questions.length}</h2>
                     <div className='question-display'>
-                        <p><strong>Category:</strong> {currentQuestion.category}</p>
-                        <p><strong>Question:</strong> {currentQuestion.question}</p>
+                        <p><strong>Category:</strong> {decodeHtmlEntities(currentQuestion.category)}</p>
+                        <p><strong>Question:</strong> {decodeHtmlEntities(currentQuestion.question)}</p>
                     </div>
                     <div className='answers-display'>
                         {allAnswers.map((answer, index) => (
