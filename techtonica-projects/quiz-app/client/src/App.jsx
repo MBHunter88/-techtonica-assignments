@@ -13,9 +13,9 @@ function App() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
   //fetch questions from trivia api 
-  const fetchQuestions = async () => {
+  const fetchQuestions = async (difficulty) => {
     try {
-      const response = await fetch(`/api/trivia`); //fetch data from server.js
+      const response = await fetch(`/api/trivia?amount=10&difficulty=${difficulty}`); //fetch data from server.js
 
       //error handling to check for response from server
       if (!response.ok) { //if not ok (codes 200-299) throw error

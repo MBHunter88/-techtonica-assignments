@@ -16,7 +16,7 @@ Welcome to **BrainBuster**, the ultimate trivia challenge that will test your br
 
 ## Demo
 
-![BrainBuster Demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWJwNnQ4b2VjbHVzeWt6ZGpzN2g3bWdxNmxnbDZzNHQzYnYxbzNlOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RDr18kPOf8aa3pjt7I/giphy.gif)
+![BrainBuster Demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTk2bDg4bmhjZDc1NGJwbWdxZ2RoemZwa3hxM3JzNWtvbjNoZjdkOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6IqG1n4PLnb1GVGs03/giphy.gif)
 
 
 ---

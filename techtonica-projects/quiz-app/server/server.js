@@ -22,7 +22,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //create route for trivia api 
 //TODO: Update request with a session token to avoid duplicate questions
 app.get('/api/trivia', async (req, res) => {
-    const apiUrl = `https://opentdb.com/api.php?amount=10`
+    const difficulty = req.query.difficulty || 'easy';
+    const apiUrl = `https://opentdb.com/api.php?amount=10&difficulty=${difficulty}`
+  
+    //check to ensure query is working
+    console.log(`Fetching trivia with difficulty: ${difficulty}`);
+    console.log(`API URL: ${apiUrl}`);
+
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();

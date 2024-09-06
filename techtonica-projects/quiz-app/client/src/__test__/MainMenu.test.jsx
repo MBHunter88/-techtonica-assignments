@@ -28,10 +28,13 @@ const mockFetchQuestions = vi.fn(() => {
   });
 });
 
+//mock state
+const mockSetGameState = vi.fn()
+
 test('button fetches data', async () => {
   // Render the MainMenu component with the mocked context
   render(
-    <AppContext.Provider value={{ fetchQuestions: mockFetchQuestions }}>
+    <AppContext.Provider value={{ setGameState: mockSetGameState, fetchQuestions: mockFetchQuestions }}>
       <MainMenu />
     </AppContext.Provider>
   );
