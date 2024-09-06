@@ -51,6 +51,9 @@ function Question() {
             //change gameState after last question to the EndScreen
             if(currentQuestionIndex === questions.length - 1) {
                 setTimeout(() => {setGameState('end')}, 2000)
+                //TODO: Decide to utilize setTimeout to go to next question or keep next question button
+            } else {
+                setTimeout(() => handleNextQuestion(), 3000)
             }
         }
     }
@@ -71,8 +74,8 @@ function Question() {
         <>
 {questions.length > 0 && currentQuestionIndex < questions.length && (
                 <div>
-                    <h2>Trivia Question {currentQuestionIndex + 1} out of {questions.length}</h2>
                     <div className='question-display'>
+                    <h2>Question {currentQuestionIndex + 1} out of {questions.length}</h2>
                         <p><strong>Category:</strong> {decodeHtmlEntities(currentQuestion.category)}</p>
                         <p><strong>Question:</strong> {decodeHtmlEntities(currentQuestion.question)}</p>
                     </div>
@@ -87,7 +90,7 @@ function Question() {
                                     color: isAnswered && answer === currentQuestion.correct_answer ? 'white' : '',
                                   }}
                             >
-                                {answer}
+                                {decodeHtmlEntities(answer)}
                             </button>
                         ))}
                     </div>

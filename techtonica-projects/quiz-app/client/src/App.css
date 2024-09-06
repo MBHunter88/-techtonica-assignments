@@ -1,9 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
+
+
+.fontdiner-swanky-regular {
+  font-family: "Fontdiner Swanky", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mountains-of-christmas-regular {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mountains-of-christmas-bold {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   font-size: 16px;
   padding: 10px;
   font-family: Arial, sans-serif;
   color: #fffefe;
   background-color: #f4f4f4;
+  background-image: url('https://img.freepik.com/free-vector/question-marks-background_78370-2896.jpg?ga=GA1.1.1034579004.1723063542&semt=ais_hybrid');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+
 }
 
 .app-container {
@@ -15,10 +41,18 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   text-align: center;
+  background-image: url('https://img.freepik.com/free-vector/gradient-zoom-effect-background_23-2149722799.jpg?ga=GA1.1.1034579004.1723063542&semt=ais_hybrid');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* No repeat of the image */
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-family: "Fontdiner Swanky", serif;
+  font-weight: 400;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  font-size: 4.5rem;
+  -webkit-text-stroke: 1px rgb(22, 3, 149); /* Creates an outlined effect */
   color: #f39c12;
   margin-bottom: 20px;
 }
@@ -27,6 +61,9 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Mountains of Christmas", serif;
+  font-size: 2.5rem;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .main-menu button {
@@ -47,7 +84,24 @@ h1 {
 
 .question-display {
   font-size: 1.5rem;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  height: 200px;
+  margin-left:20px;
+  margin-right: 20px;
+  padding-top: 10px;
+  padding-bottom:50px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-image: url('https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-54587.jpg?ga=GA1.1.1034579004.1723063542&semt=ais_hybrid');
+  background-size:cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* No repeat of the image */
+}
+
+p {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .answers-display {
@@ -62,7 +116,7 @@ h1 {
   background-color: #f39c12;
   color: white;
   padding: 10px 20px;
-  border: none;
+  border: solid;
   border-radius: 5px;
   font-size: 1.5rem;
   cursor: pointer;

@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <div className='app-container'>
-        <h1>Trivia App</h1>
+        <h1>Brain Buster!</h1>
         <AppContext.Provider value={{
           gameState,
           setGameState,
