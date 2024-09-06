@@ -94,9 +94,9 @@ function Question() {
                             </button>
                         ))}
                     </div>
-                    {currentQuestionIndex < questions.length - 1 && (
+                    {/* {currentQuestionIndex < questions.length - 1 && (
                         <button className='next-question' onClick={handleNextQuestion}>Next Question</button>
-                    )}
+                    )} */}
                     <div className='scoreBoard'>
                         <h2>Score: {score}</h2>
                     </div>
