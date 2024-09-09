@@ -1,0 +1,136 @@
+body {
+    background-color: #9292c8;
+    
+  }
+
+  h1 {
+    padding-top: 40px;
+  font-size: 3em;
+  text-align: center;
+  font-family: "Honk", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
+}
+
+  
+  #displayText {
+    background: url('images/screen-background.webp');
+    background-size: cover;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+    border-bottom-left-radius: 90px;
+    border-bottom-right-radius: 90px;
+    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+  }
+  
+  #game {
+    border-top-left-radius: 45%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 130px;
+    border-bottom-right-radius: 130px;
+    max-width: 500px;
+    max-height: 900px;
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.7), rgba(177, 156, 217, 0.7)), url('images/background.webp');
+    background-size: cover;
+    color: #ffffff;
+    margin: 30px auto 0px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.6), 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: perspective(1000px) rotateX(10deg);
+    transform-style: preserve-3d;
+}
+
+#game::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 70%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    border-top-left-radius: 45%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 130px;
+    border-bottom-right-radius: 130px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    transform: translateZ(1px);
+}
+
+
+  .stat {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size:2em;
+    border: none;
+    text-align: center;
+    padding: 5px;
+    color: rgb(0, 0, 12);
+  }
+ 
+  
+
+  #text {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.75em;
+   padding: 10px;
+    color:#1a0839;
+  }
+
+  .stat {
+    margin-top: 10px;
+    padding-top: 20px;
+  }
+  
+  button[id="button1"], button[id="button2"], button[id="button3"] {
+    font-size: 1em; /* Increase the font size */
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 60px; /* Set a larger width */
+    height: 40px; /* Set a larger height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: #f4f4f8;
+    /* background-color: #802ddf; */
+    background-image: linear-gradient(#312f35, #5f5c66);
+    border: 1px solid #e5e5e6;
+    border-radius: 50%;
+  }
+
+  #petCanvas {
+    display: block; /* Make sure the canvas is a block element */
+    margin: 0 auto; /* Center the canvas */
+    width: 256px; /* Set your desired canvas width */
+    height: 256px; /* Set your desired canvas height */
+}
+ 
+#nameInput {
+  align-items: center;
+  margin-top: 10px;
+}
+
+#submitName {
+  background-color: rgb(61, 2, 61);
+  color: white;
+  font-size: 1em;
+  border-radius: 20%;
+}
+
+#healthText, #happinessText {
+  font-family: 'Courier New', Courier, monospace;
+}

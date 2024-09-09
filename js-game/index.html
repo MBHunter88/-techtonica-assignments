@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techtonmagotchi!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Honk&family=Major+Mono+Display&family=Permanent+Marker&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Honk&family=Major+Mono+Display&family=Permanent+Marker&family=Pixelify+Sans:wght@400..700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game">
+        <header>
+            <h1>Techtonmagotchi!</h1>
+        </header>
+        <main>
+            <section id="displayText">
+                <span class="stat">Name: <strong><span id="petName"></span></strong></span>
+                <canvas id="petCanvas"></canvas>
+                <p id="text"></p>
+            <section id="stats">
+               
+                <span class="stat">Happiness: <strong><span id="happinessText"></span></strong></span>
+                <span class="stat">Health: <strong><span id="healthText"></span></strong></span>
+            </section>
+            <section id="controls">
+                <button id="button1" aria-label="Feed your pet">Feed</button>
+                <button id="button2" aria-label="Play with your pet">Play</button>
+                <button id="button3" aria-label="Clean your pet">Clean</button>
+            </section>
+            
+                <!-- <p id="initialText" style="color:black">Welcome, first name your pet!</p> -->
+               
+            
+            <section id="nameInput">
+                <input type="text" id="petNameInput" placeholder="Enter pet name">
+                <button id="submitName">Name your pet</button>
+            </section>
+        </section>
+        </main>
+        <footer>
+            <p>© 2024 MJ Production</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
