@@ -12,33 +12,33 @@ app.use(express.json());
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
-    res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+    res.json({ message: 'Yo, from My template ExpressJS with React-Vite' });
 });
 
-// create the get request for students in the endpoint '/api/students'
-app.get('/api/students', async (req, res) => {
+// create the get request for students in the endpoint '/api/events'
+app.get('/api/events', async (req, res) => {
     try {
-        const { rows: students } = await db.query('SELECT * FROM students');
-        res.send(students);
+        const { rows: events } = await db.query('SELECT * FROM events');
+        res.send(events);
     } catch (e) {
         return res.status(400).json({ e });
     }
 });
 
 // create the POST request
-app.post('/api/students', async (req, res) => {
+app.post('/api/events', async (req, res) => {
     try {
-        const newStudent = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            iscurrent: req.body.iscurrent
+        const newEvent = {
+            name: req.body.name,
+            date: req.body.date,
+            category: req.body.category
         };
-        //console.log([newStudent.firstname, newStudent.lastname, newStudent.iscurrent]);
+       
         const result = await db.query(
-            'INSERT INTO students(firstname, lastname, is_current) VALUES($1, $2, $3) RETURNING *',
-            [newStudent.firstname, newStudent.lastname, newStudent.iscurrent],
+            'INSERT INTO events(name, date, category) VALUES($1, $2, $3) RETURNING *',
+            [newEvent.name, newEvent.date, newEvent.category],
         );
-        console.log(result.rows[0]);
+        //console.log(result.rows[0]);
         res.json(result.rows[0]);
 
     } catch (e) {
@@ -48,12 +48,12 @@ app.post('/api/students', async (req, res) => {
 
 });
 
-// delete request for students
-app.delete('/api/students/:studentId', async (req, res) => {
+// delete request for events
+app.delete('/api/events/:eventId', async (req, res) => {
     try {
-        const studentId = req.params.studentId;
-        await db.query('DELETE FROM students WHERE id=$1', [studentId]);
-        console.log("From the delete request-url", studentId);
+        const eventId = req.params.eventId;
+        await db.query('DELETE FROM events WHERE id=$1', [eventId]);
+       // console.log("From the delete request-url", eventId);
         res.status(200).end();
     } catch (e) {
         console.log(e);
@@ -62,17 +62,19 @@ app.delete('/api/students/:studentId', async (req, res) => {
     }
 });
 
-//A put request - Update a student 
-app.put('/api/students/:studentId', async (req, res) =>{
+//A put request - Update a event 
+app.put('/api/events/:eventId', async (req, res) =>{
     //console.log(req.params);
-    //This will be the id that I want to find in the DB - the student to be updated
-    const studentId = req.params.studentId
-    const updatedStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname, iscurrent: req.body.is_current}
-    console.log("In the server from the url - the student id", studentId);
-    console.log("In the server, from the react - the student to be edited", updatedStudent);
-    // UPDATE students SET lastname = "something" WHERE id="16";
-    const query = `UPDATE students SET firstname=$1, lastname=$2, is_current=$3 WHERE id=${studentId} RETURNING *`;
-    const values = [updatedStudent.firstname, updatedStudent.lastname, updatedStudent.iscurrent];
+    //This will be the id that I want to find in the DB - the event to be updated
+    const eventId = req.params.eventId
+    const updatedEvent = { name: req.body.name, 
+        date: req.body.date, 
+        category: req.body.category }
+    console.log("In the server from the url - the event id", eventId);
+    console.log("In the server, from the react - the event to be edited", updatedEvent);
+    // UPDATE events SET  = "something" WHERE id="16";
+    const query = `UPDATE events SET name=$1, date=$2, category=$3 WHERE id=${eventId} RETURNING *`;
+    const values = [updatedEvent.name, updatedEvent.date, updatedEvent.category];
     try {
       const updated = await db.query(query, values);
       console.log(updated.rows[0]);
@@ -86,5 +88,5 @@ app.put('/api/students/:studentId', async (req, res) =>{
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
-    console.log(`Hola, Server listening on ${PORT}`);
+    console.log(`Hello, Server listening on ${PORT}`);
 });
