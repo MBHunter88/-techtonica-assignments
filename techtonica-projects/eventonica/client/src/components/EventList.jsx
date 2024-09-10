@@ -45,14 +45,21 @@ function EventList() {
   return (
     <div>
     <div>
-      {state.events.map((event) => (
-        <div key={event.id}>
-          <h3>{event.name}</h3>
-          <p>{event.date}</p>
+        <h2>Upcoming Events</h2>
+        <ul>
+          {state.events.map((event) => {
+            return (
+              <li className='col-md-3' key={event.id}>
+                {" "}
+                <Event
+                  event={event}
+                />
+              </li>
+            );
+          })}
+        </ul>
         </div>
-      ))}
-    </div>
-    <EventForm />
+        <EventForm />
     </div>
   );
 }
