@@ -31,12 +31,13 @@ app.post('/api/events', async (req, res) => {
         const newEvent = {
             name: req.body.name,
             date: req.body.date,
-            category: req.body.category
+            category: req.body.category,
+            location: req.body.location
         };
        
         const result = await db.query(
-            'INSERT INTO events(name, date, category) VALUES($1, $2, $3) RETURNING *',
-            [newEvent.name, newEvent.date, newEvent.category],
+            'INSERT INTO events(name, date, category, location) VALUES($1, $2, $3, $4) RETURNING *',
+            [newEvent.name, newEvent.date, newEvent.category, newEvent.location],
         );
         //console.log(result.rows[0]);
         res.json(result.rows[0]);

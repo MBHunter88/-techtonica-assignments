@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const Event = ({event}) => {
+const EventCard = ({event}) => {
 //format date 
 const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -28,7 +28,7 @@ const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
 
 }
 
-export default Event;
+export default EventCard;
 
 // <Button variant="outline-danger" onClick={()=>{onDelete(student)}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
 //             <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>

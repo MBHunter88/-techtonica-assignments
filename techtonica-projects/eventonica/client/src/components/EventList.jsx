@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useReducer } from 'react'
 import * as ioicons from 'react-icons/io5'
 import EventForm from './EventForm';
-import Event from './Event';
+import EventCard from './EventCard';
 
-//use reducer to update event list when fetched 
+//use reducer to render event list when fetched 
 const initialState = { events: [] };
 
 function eventsReducer(state, action) {
   switch (action.type) {
+    //renders list from database
     case 'SET_EVENTS':
       return { ...state, events: action.payload };
+      //renders post request from EventForm
+      case 'ADD_EVENT':
+        return{...state, events:[...state.events, action.payload]}
     default:
       return state;
   }
@@ -44,22 +48,22 @@ function EventList() {
 
   return (
     <div>
+        <EventForm dispatch={dispatch} /><br/>
     <div>
-        <h2>Upcoming Events</h2>
-        <ul>
+        <h2>Events</h2>
+        </div>
+        
+        <div className='row'>
           {state.events.map((event) => {
             return (
-              <li className='col-md-3' key={event.id}>
-                {" "}
-                <Event
+              <div className='col-md-3' key={event.id}>
+                <EventCard
                   event={event}
                 />
-              </li>
+              </div>
             );
           })}
-        </ul>
-        </div>
-        <EventForm />
+        </div>   
     </div>
   );
 }
