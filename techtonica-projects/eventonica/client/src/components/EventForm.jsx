@@ -35,13 +35,10 @@ const EventForm = ({ dispatch }) => {
             console.error('Error adding event:', error);
         }
     }
-    //request to update(put) event
-    //handler for post
-    //handler for update(put)
-    //error handling
+    
 
     return (
-        <Form className='form-events' onSubmit={handleSubmit}>
+        <Form className='col-md-4' onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Event Name</Form.Label>
                 <input
@@ -52,17 +49,6 @@ const EventForm = ({ dispatch }) => {
                     value={name || ''}
                     onChange={(e) => setName(e.target.value)}
 
-                />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Date</Form.Label>
-                <input
-                    type="text"
-                    id="add-date"
-                    placeholder="Date"
-                    // required
-                    value={date || ''}
-                    onChange={(e) => setDate(e.target.value)}
                 />
             </Form.Group>
             <Form.Group>
@@ -87,6 +73,17 @@ const EventForm = ({ dispatch }) => {
                     onChange={(e) => setLocation(e.target.value)}
                 />
             </Form.Group>
+            <Form.Group>
+                <Form.Label>Date </Form.Label><br/>
+                <input
+                    type="date"
+                    id="add-date"
+                    placeholder="Date"
+                    // required
+                    value={date || ''}
+                    onChange={(e) => setDate(e.target.value)}
+                />
+            </Form.Group><br/>
             <Form.Group>
                 <Button type="submit" variant="outline-success">Add Event</Button>
             </Form.Group>
@@ -130,24 +127,6 @@ export default EventForm
 //     setStudent({ firstname: "", lastname: "", is_current: false })
 // }
 
-// //A function to handle the post request
-// const postStudent = (newStudent) => {
-//     return fetch("http://localhost:8080/api/students", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(newStudent),
-//     })
-//         .then((response) => {
-//             return response.json();
-//         })
-//         .then((data) => {
-//             //console.log("From the post ", data);
-//             //I'm sending data to the List of Students (the parent) for updating the list
-//             onSaveStudent(data);
-//             //this line just for cleaning the form
-//             clearForm();
-//         });
-// };
 
 // //A function to handle the post request
 // const putStudent = (toEditStudent) => {

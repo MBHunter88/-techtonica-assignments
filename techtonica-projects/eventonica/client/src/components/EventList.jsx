@@ -3,17 +3,26 @@ import * as ioicons from 'react-icons/io5'
 import EventForm from './EventForm';
 import EventCard from './EventCard';
 
-//use reducer to render event list when fetched 
+//use reducer to manage events state 
 const initialState = { events: [] };
 
 function eventsReducer(state, action) {
   switch (action.type) {
-    //renders list from database
+    //set list from database
     case 'SET_EVENTS':
       return { ...state, events: action.payload };
-      //renders post request from EventForm
+      //set post request from EventForm
       case 'ADD_EVENT':
-        return{...state, events:[...state.events, action.payload]}
+        return{...state, events:[...state.events, action.payload]};
+        //set delete request
+        case 'DELETE_EVENT':
+            //debugging
+            // console.log(state.events.filter(event => event.id !== action.payload))
+            // console.log(action.payload)
+            return{...state, events: state.events.filter(event => event.id !== action.payload )}
+        
+        case 'CLEAR_EVENTS':
+      return { ...state, events: [] };
     default:
       return state;
   }
@@ -33,18 +42,21 @@ function EventList() {
           }
     
           const data = await response.json();
-          dispatch({ type: 'SET_EVENTS', payload: data }); //updates questions from parsed data api request
-        //   console.log(state)
+          dispatch({ type: 'SET_EVENTS', payload: data }); 
+        
           
     
         } catch (error) {
           console.error('Error fetching trivia questions:', error);
-         //clears data on error
+         //clears event list on error
+         dispatch({type:'CLEAR_EVENTS', payload: data})
         }
       };
 
       fetchEvents()
   }, []);
+
+ 
 
   return (
     <div>
@@ -57,8 +69,8 @@ function EventList() {
           {state.events.map((event) => {
             return (
               <div className='col-md-3' key={event.id}>
-                <EventCard
-                  event={event}
+                <EventCard key={event.id}
+                  event={event} dispatch={dispatch}
                 />
               </div>
             );

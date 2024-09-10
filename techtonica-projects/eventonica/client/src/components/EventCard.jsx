@@ -1,17 +1,26 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-//import * as ioicons from 'react-icons/io5'
+import * as ioicons from 'react-icons/io5'
 
 
 
-const EventCard = ({event}) => {
+const EventCard = ({event, dispatch }) => {
 //format date 
 const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
 })
+
+  //handler for DELETE request
+  const handleDeleteEvent = async () => {
+    await fetch(`api/events/${event.id}`, {
+        method: 'DELETE'
+    })
+    dispatch({ type: 'DELETE_EVENT', payload: event.id });
+   
+}
 
 
     return (
@@ -20,8 +29,11 @@ const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
             <Card.Title>{event.name}</Card.Title>
             <Card.Text>
           Date: {formatedDate} <br />
-          Category: {event.category || 'N/A'}
+          Category: {event.category || 'N/A'} <br/ >
+          Location: {event.location || 'N/A'}
         </Card.Text>
+        <Button variant="outline-danger" onClick={()=>{handleDeleteEvent()}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
+        {/* <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>    */}
             </Card.Body>
         </Card>
     )
@@ -30,5 +42,5 @@ const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
 
 export default EventCard;
 
-// <Button variant="outline-danger" onClick={()=>{onDelete(student)}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
-//             <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>
+
+        
