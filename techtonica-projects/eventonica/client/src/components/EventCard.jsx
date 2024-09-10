@@ -5,7 +5,7 @@ import * as ioicons from 'react-icons/io5'
 
 
 
-const EventCard = ({event, dispatch }) => {
+const EventCard = ({event, dispatch, onEdit }) => {
 //format date 
 const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -33,7 +33,7 @@ const formatedDate = new Date(event.date).toLocaleDateString('en-US', {
           Location: {event.location || 'N/A'}
         </Card.Text>
         <Button variant="outline-danger" onClick={()=>{handleDeleteEvent()}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
-        {/* <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>    */}
+        <Button variant="outline-info" onClick={()=>{onEdit(event)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>   
             </Card.Body>
         </Card>
     )

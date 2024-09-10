@@ -70,12 +70,13 @@ app.put('/api/events/:eventId', async (req, res) =>{
     const eventId = req.params.eventId
     const updatedEvent = { name: req.body.name, 
         date: req.body.date, 
-        category: req.body.category }
+        category: req.body.category, 
+        location: req.body.location}
     console.log("In the server from the url - the event id", eventId);
     console.log("In the server, from the react - the event to be edited", updatedEvent);
     // UPDATE events SET  = "something" WHERE id="16";
-    const query = `UPDATE events SET name=$1, date=$2, category=$3 WHERE id=${eventId} RETURNING *`;
-    const values = [updatedEvent.name, updatedEvent.date, updatedEvent.category];
+    const query = `UPDATE events SET name=$1, date=$2, category=$3, location=$4 WHERE id=${eventId} RETURNING *`;
+    const values = [updatedEvent.name, updatedEvent.date, updatedEvent.category, updatedEvent.location];
     try {
       const updated = await db.query(query, values);
       console.log(updated.rows[0]);

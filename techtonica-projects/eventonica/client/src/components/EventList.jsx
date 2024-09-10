@@ -20,7 +20,8 @@ function eventsReducer(state, action) {
             // console.log(state.events.filter(event => event.id !== action.payload))
             // console.log(action.payload)
             return{...state, events: state.events.filter(event => event.id !== action.payload )}
-        
+        case 'UPDATE_EVENT':
+            return {...state, events: state.events.map(event => event.id === action.payload.id ? action.payload : event)}
         case 'CLEAR_EVENTS':
       return { ...state, events: [] };
     default:
@@ -30,6 +31,7 @@ function eventsReducer(state, action) {
 
 function EventList() {
   const [state, dispatch] = useReducer(eventsReducer, initialState);
+  const [selectedEvent, setSelectedEvent] = useState(null)
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -56,11 +58,25 @@ function EventList() {
       fetchEvents()
   }, []);
 
- 
+ // Handle event update
+  const handleUpdate = async (updatedEvent) => {
+    try {
+      const response = await fetch(`/api/events/${updatedEvent.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedEvent),
+      });
+      const data = await response.json();
+      dispatch({ type: 'UPDATE_EVENT', payload: data });
+      setSelectedEvent(null); // Clear the edit state after update
+    } catch (error) {
+      console.error('Error updating event:', error);
+    }
+  };
 
   return (
     <div>
-        <EventForm dispatch={dispatch} /><br/>
+        <EventForm dispatch={dispatch} existingEvent={selectedEvent} onUpdate={handleUpdate} clearEdit={() => setSelectedEvent(null)} /><br/>
     <div>
         <h2>Events</h2>
         </div>
@@ -70,7 +86,7 @@ function EventList() {
             return (
               <div className='col-md-3' key={event.id}>
                 <EventCard key={event.id}
-                  event={event} dispatch={dispatch}
+                  event={event} dispatch={dispatch} onEdit={setSelectedEvent}
                 />
               </div>
             );

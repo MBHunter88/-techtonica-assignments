@@ -1,41 +1,66 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from "react-bootstrap"
 
 
 
-const EventForm = ({ dispatch }) => {
+const EventForm = ({ dispatch, existingEvent, onUpdate, clearEdit }) => {
     //state management
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
     const [category, setCategory] = useState('');
     const [location, setLocation] = useState('');
 
-    //handler for event post request
+    //prefill form when editing event
+    useEffect(() => {
+        if (existingEvent) {
+          setName(existingEvent.name);
+          setDate(formatDate(existingEvent.date));
+          setCategory(existingEvent.category);
+          setLocation(existingEvent.location);
+        }
+      }, [existingEvent]);
+      
+  // Function to format date to YYYY-MM-DD (the standard input date format)
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0]; // Format date as 'YYYY-MM-DD'
+  };
+
+    //handler for event post and put request
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newEvent = { name, date, category, location }
-
+        const event = { name, date, category, location }
+//edditing or put request
+if(existingEvent){
+    const updatedEvent = {...existingEvent, ...event}
+    onUpdate(updatedEvent)
+    
+}else {
+    //adding or post request
         try {
             const response = await fetch('api/events', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newEvent)
+                body: JSON.stringify(event)
             })
             const addedEvent = await response.json()
 
             //useReducer dispatch to add the event to EventList
             dispatch({ type: 'ADD_EVENT', payload: addedEvent });
-            //reset form fields
-            setName('');
-            setDate('');
-            setCategory('');
-            setLocation('');
-
         } catch (error) {
             console.error('Error adding event:', error);
         }
     }
-    
+    clearForm()
+    }
+
+    const clearForm = () => {
+        setName('');
+        setDate('');
+        setCategory('');
+        setLocation('');
+        if (clearEdit) clearEdit(); // Clear the edit state
+      };
 
     return (
         <Form className='col-md-4' onSubmit={handleSubmit}>
@@ -85,7 +110,14 @@ const EventForm = ({ dispatch }) => {
                 />
             </Form.Group><br/>
             <Form.Group>
-                <Button type="submit" variant="outline-success">Add Event</Button>
+                <Button type="submit" variant="outline-success">
+                    {existingEvent ? 'Update Event' : 'Add Event'}
+                </Button>
+                {existingEvent && (
+                    <Button variant="outline-warning" onClick={clearForm} style={{ marginLeft: '1rem' }}>
+            Cancel
+          </Button>
+        )}
             </Form.Group>
         </Form>
     );
