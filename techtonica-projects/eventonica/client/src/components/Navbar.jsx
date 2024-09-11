@@ -13,12 +13,13 @@ function MyNavBar({ searchQuery, setSearchQuery }) {
       <Navbar bg="dark" variant="dark" sticky="top" expand='lg' className='my-navbar'>
         <Container>
           <Navbar.Brand href="/">
-            <img
+          <h1>EVENTONICA</h1>
+            {/* <img
               src={Logo}
               height="40"
               className="d-lg-inline-block alighn-top"
               alt="Techtonica logo"
-            />
+            /> */}
           </Navbar.Brand>
           <Nav className="me-auto">
           </Nav>

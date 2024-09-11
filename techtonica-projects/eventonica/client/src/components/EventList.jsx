@@ -26,8 +26,8 @@ function eventsReducer(state, action) {
         case 'UPDATE_EVENT':
             return { ...state, events: state.events.map(event => event.id === action.payload.id ? action.payload : event) }
         //clears events in case of an error    
-        case 'CLEAR_EVENTS':
-            return { ...state, events: [] };
+        // case 'CLEAR_EVENTS':
+        //     return { ...state, events: [] };
         default:
             return state;
     }
@@ -43,7 +43,7 @@ function EventList() {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await fetch(`/api/events`);
+                const response = await fetch(`http://localhost:8080/api/events`);
 
                 //error handling to check for response from server
                 if (!response.ok) {
@@ -56,9 +56,9 @@ function EventList() {
 
 
             } catch (error) {
-                console.error('Error fetching trivia questions:', error);
+                console.error('Error fetching events:', error);
                 //clears event list on error
-                dispatch({ type: 'CLEAR_EVENTS', payload: data })
+                // dispatch({ type: 'CLEAR_EVENTS', payload: data })
             }
         };
 

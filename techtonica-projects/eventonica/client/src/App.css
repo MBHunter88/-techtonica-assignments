@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.orbitron-logo {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+
 .App {
   min-height: 100vh;
   background-color: rgb(238, 232, 232);
@@ -16,6 +26,10 @@ a.navbar-brand {
 
 h2 {
   margin-top: 10px !important;
+}
+
+h1 {
+font-family: "Orbitron", sans-serif;
 }
 
 .event-list {
@@ -46,6 +60,16 @@ button.btn.btn-primary {
   margin-top: 25px;
 }
 
+.btn-outline-custom {
+  color: #d0d0d0;
+  border-color: #d0d0d0;
+  background-color: #d0d0d0
+}
+
+.btn-outline-custom:hover {
+  background-color: #d0d0d0;
+  color: #fff;
+}
 
 .form-label {
   margin-bottom: 0 !important;
