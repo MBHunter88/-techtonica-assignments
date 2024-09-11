@@ -10,4 +10,8 @@ export default defineConfig({
       '/api/events': 'http://localhost:8080', 
     },
   },
+  test: {
+    environment: 'jsdom', 
+    globals: true,  
+  },
 })

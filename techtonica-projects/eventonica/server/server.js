@@ -92,3 +92,5 @@ app.put('/api/events/:eventId', async (req, res) =>{
 app.listen(PORT, () => {
     console.log(`Hello, Server listening on ${PORT}`);
 });
+
+module.exports = app;
