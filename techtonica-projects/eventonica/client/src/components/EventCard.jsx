@@ -24,7 +24,7 @@ const EventCard = ({ event, dispatch, onEdit }) => {
 
 
     return (
-        <Card className='mb-3'>
+        <Card className='event-card mb-3 shawdow-sm'>
             <Card.Body>
                 <Card.Title>{event.name}</Card.Title>
                 <Card.Text>
@@ -33,7 +33,7 @@ const EventCard = ({ event, dispatch, onEdit }) => {
                     Location: {event.location || 'N/A'}
                 </Card.Text>
                 <Button variant="outline-danger" onClick={() => { handleDeleteEvent() }} style={{ padding: '0.6em', marginRight: '0.9em' }}><ioicons.IoTrash /></Button>
-                <Button variant="outline-info" onClick={() => { onEdit(event) }} style={{ padding: '0.6em' }}> <ioicons.IoSync /></Button>
+                <Button variant="outline-warning" onClick={() => { onEdit(event) }} style={{ padding: '0.6em' }}> <ioicons.IoPencil /></Button>
             </Card.Body>
         </Card>
     )

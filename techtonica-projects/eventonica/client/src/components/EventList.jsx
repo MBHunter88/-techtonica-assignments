@@ -3,6 +3,9 @@ import * as ioicons from 'react-icons/io5'
 import EventForm from './EventForm';
 import EventCard from './EventCard';
 import MyNavBar from './Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 //initial state for event list
 const initialState = { events: [] };
@@ -88,27 +91,34 @@ function EventList() {
 
     return (
         <div>
-            {/* Search input */}
-<MyNavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /><br />
-            {/* Event form */}
-            <EventForm
+        {/* Pass searchQuery and setSearchQuery as props to MyNavBar */}
+        <MyNavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Container>
+          <Row>
+            {/* Left Column: Event Form */}
+            <Col md={7} sm={12} className="mb-4">
+              <EventForm
                 dispatch={dispatch}
                 existingEvent={selectedEvent}
                 onUpdate={handleUpdate}
                 clearEdit={() => setSelectedEvent(null)}
-            />
-            <br />
-            <div>
-                <h2>Events</h2>
-            </div>
-            <div className='row'>
+              />
+            </Col>
+  
+            {/* Right Column: Event Cards */}
+            <Col md={5} sm={12}>
+              <h2>Events</h2>
+              <div className='event-list'>
                 {filteredEvents.map((event) => (
-                    <div className='col-md-3' key={event.id}>
-                        <EventCard event={event} dispatch={dispatch} onEdit={setSelectedEvent} />
-                    </div>
+                  <div key={event.id}>
+                    <EventCard event={event} dispatch={dispatch} onEdit={setSelectedEvent} />
+                  </div>
                 ))}
-            </div>
-        </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
 }
 

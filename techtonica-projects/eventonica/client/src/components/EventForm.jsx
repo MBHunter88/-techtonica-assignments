@@ -65,7 +65,7 @@ const EventForm = ({ dispatch, existingEvent, onUpdate, clearEdit }) => {
     };
 
     return (
-        <Form className='col-md-4' onSubmit={handleSubmit}>
+        <Form className='event-form col-md-4 shawdow p-3' onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Event Name</Form.Label>
                 <input
@@ -112,11 +112,11 @@ const EventForm = ({ dispatch, existingEvent, onUpdate, clearEdit }) => {
                 />
             </Form.Group><br />
             <Form.Group>
-                <Button type="submit" variant="outline-success">
+                <Button type="submit" variant="success">
                     {existingEvent ? 'Update Event' : 'Add Event'}
                 </Button>
                 {existingEvent && (
-                    <Button variant="outline-warning" onClick={clearForm} style={{ marginLeft: '1rem' }}>
+                    <Button variant="outline-dark" onClick={clearForm} style={{ marginLeft: '1rem' }}>
                         Cancel
                     </Button>
                 )}
