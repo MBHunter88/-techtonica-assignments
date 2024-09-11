@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react'
 import * as ioicons from 'react-icons/io5'
 import EventForm from './EventForm';
 import EventCard from './EventCard';
+import MyNavBar from './Navbar';
 
 //initial state for event list
 const initialState = { events: [] };
@@ -88,16 +89,7 @@ function EventList() {
     return (
         <div>
             {/* Search input */}
-            <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Search events by name, category, or location"
-                    className="form-control"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-            </div>
-
+<MyNavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /><br />
             {/* Event form */}
             <EventForm
                 dispatch={dispatch}
