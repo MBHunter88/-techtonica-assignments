@@ -56,15 +56,27 @@ setIsFavorite((prevIsFavorite) => !prevIsFavorite)
                     </span>
                 </Card.Title>
                 <Card.Text>
-                    Date: {formatedDate}<br />
+                    Location: {event.location || 'N/A'}<br />
                     Category: {event.category || 'N/A'} <br />
-                    Location: {event.location || 'N/A'}
+                    Date: {formatedDate}
+                    <span className='float-end'>
+                        <Button 
+                        variant="outline-danger" 
+                        onClick={() => { handleDeleteEvent() }} 
+                        style={{ padding: '0.6em', marginLeft: '0.99em' }}> 
+                        Delete <ioicons.IoTrash />
+                        </Button>
+                        </span>
+                        <span className='float-end'>
+                         <Button 
+                         variant="outline-warning" 
+                         onClick={() => { onEdit(event) }} 
+                         style={{ padding: '0.6em' }}>
+                         Edit <ioicons.IoPencil />
+                         </Button>
+                         </span>
                 </Card.Text>
-                <Button variant="outline-danger" onClick={() => { handleDeleteEvent() }} style={{ padding: '0.6em', marginRight: '0.9em' }}><ioicons.IoTrash /></Button>
-                <Button variant="outline-warning" onClick={() => { onEdit(event) }} style={{ padding: '0.6em' }}> <ioicons.IoPencil /></Button>
-
             </Card.Body>
-            <Card.Footer></Card.Footer>
         </Card>
     )
 

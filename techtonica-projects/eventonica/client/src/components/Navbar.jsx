@@ -10,7 +10,7 @@ function MyNavBar({ searchQuery, setSearchQuery }) {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" sticky="top" expand='lg' className='my-navbar'>
+      <Navbar bg="dark" data-bs-theme="dark" sticky="top" expand='lg' className='my-navbar'>
         <Container>
           <Navbar.Brand href="/">
           <h1>EVENTONICA</h1>

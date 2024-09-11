@@ -66,39 +66,50 @@ const EventForm = ({ dispatch, existingEvent, onUpdate, clearEdit }) => {
 
     return (
         <Form className='event-form col-md-4 shawdow p-3' onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label>Event Name</Form.Label>
+            <Form.Group >
+                
+                <Form.Label>Name</Form.Label>
                 <input
                     type="text"
                     id="add-event-name"
-                    placeholder="Event Name"
+                    placeholder="Enter event name"
                     required
                     value={name || ''}
                     onChange={(e) => setName(e.target.value)}
 
                 />
             </Form.Group>
-            <Form.Group>
-                <Form.Label>Category</Form.Label>
-                <input
-                    type="text"
-                    id="add-category"
-                    placeholder="Category"
-                    required
-                    value={category || ''}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
-            </Form.Group>
+            
             <Form.Group>
                 <Form.Label>Location</Form.Label>
                 <input
                     type="text"
                     id="add-location"
-                    placeholder="Location"
+                    placeholder="Enter event location"
                     required
                     value={location || ''}
                     onChange={(e) => setLocation(e.target.value)}
                 />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Category</Form.Label>
+                <Form.Select aria-label="Default select category" onChange={(e) => setCategory(e.target.value)}>
+                    <option>Select category...</option>
+                    <option value="Art">Art</option>
+                    <option value="Business">Business</option>
+                    <option value="Conference">Conference</option>
+                    <option value="Food">Food</option>
+                    <option value="Music">Music</option>
+
+                </Form.Select>
+                {/* <input
+                    type="text"
+                    id="add-category"
+                    placeholder="Enter event category"
+                    required
+                    value={category || ''}
+                    onChange={(e) => setCategory(e.target.value)}
+                /> */}
             </Form.Group>
             <Form.Group>
                 <Form.Label>Date </Form.Label><br />
