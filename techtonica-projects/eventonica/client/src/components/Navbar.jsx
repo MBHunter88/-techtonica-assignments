@@ -14,12 +14,6 @@ function MyNavBar({ searchQuery, setSearchQuery }) {
         <Container>
           <Navbar.Brand href="/">
           <h1>EVENTONICA</h1>
-            {/* <img
-              src={Logo}
-              height="40"
-              className="d-lg-inline-block alighn-top"
-              alt="Techtonica logo"
-            /> */}
           </Navbar.Brand>
           <Nav className="me-auto">
           </Nav>
@@ -32,11 +26,6 @@ function MyNavBar({ searchQuery, setSearchQuery }) {
               onChange={(e) => setSearchQuery(e.target.value)} // Update the search query state
             />
           </Form>
-          {/* <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">MJ Bedford Hunter</a>
-            </Navbar.Text>
-          </Navbar.Collapse> */}
         </Container>
       </Navbar>
     </>

@@ -30,6 +30,9 @@ The following technologies were used to build this app:
 - **Responsive UI**: Fully responsive UI built with Bootstrap.
 - **Persistent Data**: Events are stored in a PostgreSQL database.
 
+## Demo
+![short demo of web appliatoon](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXc2b281ZmVhbjU0Yng4NGEwOHh5b3Uyam04YmJwbzZmbnY3eTlvZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XHFb42rroPwGIdxNa3/giphy.gif)
+
 ## Getting Started
 
 To get a local copy of the project up and running, follow these steps.
