@@ -32,9 +32,16 @@ const handleFavEvent = () => {
 setIsFavorite((prevIsFavorite) => !prevIsFavorite) 
 }
 
+//check if event date has passed compared to current date
+const isPastEvent = new Date(event.date) < new Date()
 
     return (
-        <Card className='event-card mb-3 shawdow-sm'>
+        <Card
+        className={`event-card mb-3 shadow-sm ${isPastEvent ? 'past-event' : ''}`}
+        style={{
+          opacity: isPastEvent ? 0.5 : 1, // Grays out past events
+        }}
+      >
             <Card.Body>
 
                 <Card.Title>{event.name}
