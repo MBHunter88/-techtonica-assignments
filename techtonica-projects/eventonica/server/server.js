@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 // create the get request for students in the endpoint '/api/events'
 app.get('/api/events', async (req, res) => {
     try {
-        const { rows: events } = await db.query('SELECT * FROM events ORDER BY date DESC');
+        const { rows: events } = await db.query('SELECT * FROM events ORDER BY date ASC');
         res.send(events);
     } catch (e) {
         return res.status(400).json({ e });

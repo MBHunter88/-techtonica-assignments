@@ -23,20 +23,20 @@ function MyNavBar({ searchQuery, setSearchQuery }) {
           </Navbar.Brand>
           <Nav className="me-auto">
           </Nav>
-          <Form className="d-flex search-form">
+          <Form className="d-flex ms-auto">
             <FormControl
               type="search"
               placeholder="Search events"
-              className="me-2"
+              className="search-form"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)} // Update the search query state
             />
           </Form>
-          <Navbar.Collapse className="justify-content-end">
+          {/* <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               Signed in as: <a href="#login">MJ Bedford Hunter</a>
             </Navbar.Text>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
         </Container>
       </Navbar>
     </>

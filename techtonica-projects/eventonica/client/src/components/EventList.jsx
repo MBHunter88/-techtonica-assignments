@@ -6,7 +6,7 @@ import MyNavBar from './Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import FeaturedEvent from './FeaturedEvent'
 //initial state for event list
 const initialState = { events: [] };
 
@@ -96,8 +96,7 @@ function EventList() {
       <Container>
         <Row>
           {/* Right Column: Event Cards */}
-          <Col md={7} sm={12}>
-            <h2>Events</h2>
+          <Col md={4} sm={16}>
             <div className='event-list'>
               {filteredEvents.map((event) => (
                 <div key={event.id}>
@@ -108,7 +107,7 @@ function EventList() {
           </Col>
 
           {/* Left Column: Event Form */}
-          <Col md={5} sm={12} className="mb-4">
+          <Col md={6} sm={16} className="mb-4">
             <EventForm
               dispatch={dispatch}
               existingEvent={selectedEvent}
@@ -116,7 +115,11 @@ function EventList() {
               clearEdit={() => setSelectedEvent(null)}
             />
           </Col>
-
+          <Col md={2} sm={16}>
+            <div className='featured-event'>
+              <FeaturedEvent />
+            </div>
+          </Col>
 
         </Row>
       </Container>
