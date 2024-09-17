@@ -36,7 +36,7 @@ const Species = ({ fetchSightings, setSightings }) => {
         <>
             <div className='species-card'>
                 {species.map((item) => (
-                    <Card key={item.id} style={{ width: '18rem' }}>
+                    <><Card key={item.id} style={{ width: '18rem' }}>
                         <Card.Img variant="top"
                             src={`http://localhost:8080${item.image_url}`}
                             alt={item.common_name}
@@ -54,13 +54,17 @@ const Species = ({ fetchSightings, setSightings }) => {
                                     onClick={() => handleShowSightings(item.common_name)}>
                                     {activeSpeciesName === item.common_name ? 'Hide Sightings' : 'Show Sightings'}
                                 </Button>
-                                {/* Render Sightings component if this species is active */}
-                                {activeSpeciesName === item.common_name && <Sightings species={item.common_name} />}
+
                             </div>
                         </Card.Body>
                     </Card>
+                        <div>
+                            {/* Render Sightings component if this species is active */}
+                            {activeSpeciesName === item.common_name && <Sightings species={item.common_name} />}
+                        </div></>
                 ))}
-            </div>
+            </div><br/>
+            <Button>Add Species</Button>
         </>
     );
 };

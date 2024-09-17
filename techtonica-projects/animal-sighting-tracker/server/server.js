@@ -170,6 +170,7 @@ app.get('/sightings/species/:species', async (req, res) => {
           sightings.is_healthy,
           sightings.sighter_email,
           individuals.nickname,
+          individuals.scientist,
           species.common_name,
           species.scientific_name
         FROM sightings
@@ -262,6 +263,7 @@ app.get('/api/individuals', async (req, res) => {
 //READ individual JOIN query for individuals tracked by species
 app.get('/individuals/species/:species', async (req, res) => {
     const speciesName = req.params.species;
+    
     try {
       const result = await db.query(`
         SELECT 
@@ -273,7 +275,7 @@ app.get('/individuals/species/:species', async (req, res) => {
         JOIN species ON individuals.species_id = species.id
         WHERE species.common_name = $1;
       `, [speciesName]);
-      res.json(result);
+      res.json(result.rows);
     } catch (err) {
       res.status(500).send('Error fetching individuals for species');
     }

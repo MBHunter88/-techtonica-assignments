@@ -22,8 +22,10 @@ a.navbar-brand {
 .species-card {
   display: flex;
   text-align: center;
+  margin-left: 6rem;
   margin-top: 25px;
   flex: 1;
+  width:100%;
   gap: 3em;
 }
 
