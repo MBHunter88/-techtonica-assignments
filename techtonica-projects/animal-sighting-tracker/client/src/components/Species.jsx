@@ -1,50 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Card } from "react-bootstrap"
+import Sightings from './Sightings';
 
-const Species = ({fetchSightings}) => {
-    const [species, setSpecies] = useState([])
-    //useEffect to render events on page load
+const Species = ({ fetchSightings, setSightings }) => {
+    const [species, setSpecies] = useState([]);
+    const [activeSpeciesName, setActiveSpeciesName] = useState(null);
+
+    // Fetch species on page load
     useEffect(() => {
         const fetchSpecies = async () => {
             try {
                 const response = await fetch(`http://localhost:8080/api/species`);
 
-                //error handling to check for response from server
                 if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`)
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
                 }
 
                 const data = await response.json();
-                setSpecies(data)
-                // dispatch({ type: 'SET_EVENTS', payload: data });
-
-
+                setSpecies(data);
 
             } catch (error) {
-                console.error('Error fetching events:', error);
-                //clears event list on error
-                // dispatch({ type: 'CLEAR_EVENTS', payload: data })
+                console.error('Error fetching species:', error);
             }
         };
 
-        fetchSpecies()
+        fetchSpecies();
     }, []);
 
-    const handleShowSightings = (species) => {
-        fetch(`/sightings/species/${species}`)
-          .then(response => response.json())
-          .then(data => setSightings(data))
-          .catch(error => console.error('Error fetching sightings:', error));
-      };
-
+    // Toggle sightings display for species by name
+    const handleShowSightings = (speciesName) => {
+        setActiveSpeciesName(prevName => (prevName === speciesName ? null : speciesName));
+    };
 
     return (
         <>
-      
-            <div>
+            <div className='species-card'>
                 {species.map((item) => (
                     <Card key={item.id} style={{ width: '18rem' }}>
-                        {console.log(`Image URL for ${item.common_name}:`, item.image_url)}
                         <Card.Img variant="top"
                             src={`http://localhost:8080${item.image_url}`}
                             alt={item.common_name}
@@ -57,15 +49,20 @@ const Species = ({fetchSightings}) => {
                                 <br />
                                 Conservation Status: {item.conservation_status_code}
                             </Card.Text>
-                            <Button className="btn btn-primary" onClick={() => fetchSightings(item.common_name)}>Sightings</Button>
+                            <div>
+                                <Button className="btn btn-primary"
+                                    onClick={() => handleShowSightings(item.common_name)}>
+                                    {activeSpeciesName === item.common_name ? 'Hide Sightings' : 'Show Sightings'}
+                                </Button>
+                                {/* Render Sightings component if this species is active */}
+                                {activeSpeciesName === item.common_name && <Sightings species={item.common_name} />}
+                            </div>
                         </Card.Body>
                     </Card>
                 ))}
             </div>
         </>
-
     );
 };
 
-
-export default Species
+export default Species;

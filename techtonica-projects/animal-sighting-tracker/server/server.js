@@ -175,9 +175,11 @@ app.get('/sightings/species/:species', async (req, res) => {
         FROM sightings
         JOIN individuals ON sightings.individual_id = individuals.id
         JOIN species ON individuals.species_id = species.id
-        WHERE species.common_name = $1;
+        WHERE species.common_name ILIKE $1;
       `, [speciesName]);
-      res.json(result);
+      res.json(result.rows);
+      console.log('Fetched sightings:', result.rows);
+
     } catch (err) {
       res.status(500).send('Error fetching sightings for species');
     }
