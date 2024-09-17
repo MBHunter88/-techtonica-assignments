@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
+app.use('/images', express.static('public/images'));
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
@@ -150,7 +151,7 @@ app.get('/api/sightings', async (req, res) => {
       FROM sightings
       JOIN individuals ON sightings.individual_id = individuals.id
       JOIN species ON individuals.species_id = species.id;`);
-        res.send(sightings);
+        res.send(sightings.rows);
     } catch (e) {
         return res.status(400).json({ e });
     }
