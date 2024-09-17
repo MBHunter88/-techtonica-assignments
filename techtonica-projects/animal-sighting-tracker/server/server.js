@@ -158,9 +158,9 @@ app.get('/api/sightings', async (req, res) => {
 });
 
 //READ sighting JOIN query that filters based on species
-app.get('/sightings/species/:species', async (req, res) => {
-    const speciesName = req.params.species;
-    console.log('Species name:', speciesName);
+app.get('/api/sightings/individuals/:nickname', async (req, res) => {
+    const nickname = req.params.nickname;
+  
     try {
       const result = await db.query(`
         SELECT 
@@ -176,8 +176,8 @@ app.get('/sightings/species/:species', async (req, res) => {
         FROM sightings
         JOIN individuals ON sightings.individual_id = individuals.id
         JOIN species ON individuals.species_id = species.id
-        WHERE species.common_name ILIKE $1;
-      `, [speciesName]);
+        WHERE individuals.nickname ILIKE $1;
+      `, [nickname]);
       res.json(result.rows);
       console.log('Fetched sightings:', result.rows);
 

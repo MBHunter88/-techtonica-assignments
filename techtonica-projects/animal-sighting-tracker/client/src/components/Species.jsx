@@ -1,72 +1,85 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Card } from "react-bootstrap"
-import Sightings from './Sightings';
+import React, { useState, useEffect } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import Individual from './Individual';
 
-const Species = ({ fetchSightings, setSightings }) => {
-    const [species, setSpecies] = useState([]);
-    const [activeSpeciesName, setActiveSpeciesName] = useState(null);
+const Species = () => {
+  const [species, setSpecies] = useState([]);
+  const [activeSpecies, setActiveSpecies] = useState(null);
 
-    // Fetch species on page load
-    useEffect(() => {
-        const fetchSpecies = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/api/species`);
-
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                setSpecies(data);
-
-            } catch (error) {
-                console.error('Error fetching species:', error);
-            }
-        };
-
-        fetchSpecies();
-    }, []);
-
-    // Toggle sightings display for species by name
-    const handleShowSightings = (speciesName) => {
-        setActiveSpeciesName(prevName => (prevName === speciesName ? null : speciesName));
+  // Fetch species on page load
+  useEffect(() => {
+    const fetchSpecies = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/species`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        setSpecies(data);
+      } catch (error) {
+        console.error('Error fetching species:', error);
+      }
     };
 
-    return (
-        <>
-            <div className='species-card'>
-                {species.map((item) => (
-                    <><Card key={item.id} style={{ width: '18rem' }}>
-                        <Card.Img variant="top"
-                            src={`http://localhost:8080${item.image_url}`}
-                            alt={item.common_name}
-                            style={{ width: '100%', height: '200px' }} />
+    fetchSpecies();
+  }, []);
 
-                        <Card.Body>
-                            <Card.Title>{item.common_name}</Card.Title>
-                            <Card.Text>
-                                Scientific Name: {item.scientific_name}
-                                <br />
-                                Conservation Status: {item.conservation_status_code}
-                            </Card.Text>
-                            <div>
-                                <Button className="btn btn-primary"
-                                    onClick={() => handleShowSightings(item.common_name)}>
-                                    {activeSpeciesName === item.common_name ? 'Hide Sightings' : 'Show Sightings'}
-                                </Button>
+  // handle selecting a species to show individuals listed for species 
+  const handleShowIndividuals = (species) => {
+    setActiveSpecies(species); 
+  };
 
-                            </div>
-                        </Card.Body>
-                    </Card>
-                        <div>
-                            {/* Render Sightings component if this species is active */}
-                            {activeSpeciesName === item.common_name && <Sightings species={item.common_name} />}
-                        </div></>
-                ))}
-            </div><br/>
-            <Button>Add Species</Button>
-        </>
-    );
+  //funtion to return name for button based on selected specie
+  function getPackName(commonName) {
+    if (commonName === 'Red Wolf') return 'the Pack';
+    if (commonName === 'Sloth Bear') return 'the Sleuth';
+    if (commonName === 'Rust Patched Bumble Bee') return 'the Hive';
+    return '';
+  }
+
+  return (
+    <>
+      <div className="species-card">
+        {!activeSpecies ? (
+          species.map((item) => (
+            <React.Fragment key={item.id}>
+              <Card style={{ width: '27em' }}>
+                <Card.Img
+                  variant="top"
+                  src={`http://localhost:8080${item.image_url}`}
+                  alt={item.common_name}
+                  style={{ width: '100%', height: '100%', aspectRatio: '4/3', opacity: '100%' }}
+                />
+                <Card.Body>
+                  <Card.Title>{item.common_name} 
+                    <span style={{ fontStyle: 'italic' }} >({item.scientific_name})</span>
+                 </Card.Title>
+                  <Card.Text>
+                    Status: {item.conservation_status_code}
+                    <br />
+                    Left in the wild: {item.number_in_wild}
+                  </Card.Text>
+                  <Button
+                    className="btn btn-primary"
+                    onClick={() => handleShowIndividuals(item)}
+                  >
+                    Meet {getPackName(item.common_name)}
+                  </Button>
+                </Card.Body>
+              </Card>
+            </React.Fragment>
+          ))
+        ) : (
+          // Render Individual component when a species is selected
+          <Individual
+            getPackName={getPackName}
+            species={activeSpecies}
+            goBack={() => setActiveSpecies(null)} // Go back to species list
+          />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Species;
