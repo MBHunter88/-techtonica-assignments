@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, ListGroup, Button } from 'react-bootstrap';
+import { Card, ListGroup, Button, Modal } from 'react-bootstrap';
+import SightingsForm from './SightingsForm';
 
-const Sightings = ({ individual, goBack }) => {
+const Sightings = ({ individual, goBack, handleAddSighting, showSightingModal, setShowSightingModal }) => {
   const [sightings, setSightings] = useState([]);
 
   // Fetch sightings by individual's nickname
@@ -23,7 +24,26 @@ const Sightings = ({ individual, goBack }) => {
     fetchSightings();
   }, [individual]);
 
-  
+  // Handle form submission to add a new sighting
+  const handleFormSubmit = async (formData) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/sightings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, individual_id: individual.id }), // Include individual.id in the request body
+      });
+
+      if (response.ok) {
+        const newSighting = await response.json();
+        setSightings([...sightings, newSighting]); // Add new sighting to list
+        setShowSightingModal(false); // Close modal after submission
+      }
+    } catch (error) {
+      console.error('Error adding sighting:', error);
+    }
+  };
 
   return (
     <>
@@ -35,15 +55,30 @@ const Sightings = ({ individual, goBack }) => {
               <ListGroup variant="flush">
                 <ListGroup.Item>Healthy: {item.is_healthy ? 'Yes' : 'No'}</ListGroup.Item>
                 <ListGroup.Item>Location: {item.location}</ListGroup.Item>
-                <ListGroup.Item>Scientist: {item.scientist}</ListGroup.Item>
                 <ListGroup.Item>Contact: {item.sighter_email}</ListGroup.Item>
                 <ListGroup.Item>Date: {new Date(item.date_of_sighting).toLocaleDateString()}</ListGroup.Item>
               </ListGroup>
+          
             </Card>
           ))
         ) : (
           <p>No sightings found for this individual.</p>
         )}
+
+        <Button onClick={() => setShowSightingModal(true)} className="btn btn-success mt-3">
+          Add New Sighting
+        </Button>
+
+        {/* Modal to add a new sighting */}
+        <Modal show={showSightingModal} onHide={() => setShowSightingModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add New Sighting</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Pass the form submit handler */}
+            <SightingsForm onSubmit={handleFormSubmit} />
+          </Modal.Body>
+        </Modal>
 
         <Button onClick={goBack} className="btn btn-secondary" style={{ marginTop: '1rem' }}>
           Back to Individual List

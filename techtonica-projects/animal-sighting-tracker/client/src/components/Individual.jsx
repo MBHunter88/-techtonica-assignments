@@ -6,7 +6,8 @@ import IndividualForm from './IndividualForm';
 const Individual = ({ species, goBack, getPackName }) => {
   const [individuals, setIndividuals] = useState([]);
   const [selectedIndividual, setSelectedIndividual] = useState(null); 
-  const [showModal, setShowModal] = useState(false);
+  const [showIndividualModal, setShowIndividualModal] = useState(false);
+  const [showSightingModal, setShowSightingModal] = useState(false);
 
   // Fetch individuals for the selected species
   useEffect(() => {
@@ -45,7 +46,7 @@ const Individual = ({ species, goBack, getPackName }) => {
       if (response.ok) {
         const newIndividual = await response.json();
         setIndividuals([...individuals, newIndividual]); // Add new individual to list
-        setShowModal(false); // Close modal after submission
+        setShowIndividualModal(false);  // Close modal after submission
       }
     } catch (error) {
       console.error('Error adding individual:', error);
@@ -54,7 +55,14 @@ const Individual = ({ species, goBack, getPackName }) => {
 
   // Show the modal to add a new individual
   const handleAddIndividual = () => {
-    setShowModal(true);
+    setShowIndividualModal(true);
+    setShowSightingModal(false);
+  };
+
+   // Show the modal to add a new sighting
+   const handleAddSighting = () => {
+    setShowSightingModal(true);
+    setShowIndividualModal(false); 
   };
 
   return (
@@ -84,6 +92,10 @@ const Individual = ({ species, goBack, getPackName }) => {
          <Sightings
             individual={selectedIndividual}
             goBack={() => setSelectedIndividual(null)} 
+            handleAddSighting={handleAddSighting}
+            showSightingModal={showSightingModal}
+            setShowSightingModal={setShowSightingModal}
+            selectedIndividual={selectedIndividual}
           />
         )}
            <Button className="btn btn-primary" 
@@ -92,7 +104,7 @@ const Individual = ({ species, goBack, getPackName }) => {
             Add to {getPackName(species.common_name)}
             </Button>
             {/* Modal to add a new individual */}
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal show={showIndividualModal} onHide={() => setShowIndividualModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Add to {getPackName(species.common_name)}</Modal.Title>
           </Modal.Header>
