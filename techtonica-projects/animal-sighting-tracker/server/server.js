@@ -198,8 +198,8 @@ app.put('/api/sightings/:sightingId', async (req, res) =>{
     };
     console.log("In the server from the url - the sighting id", sightingId);
     console.log("In the server, from the react - the sighting to be edited", updatedSighting);
-    const query = `UPDATE sightings SET date_of_sighting=$1, location=$2, is_healthy=$3, sighter_email=$4, individual_id=$5 WHERE id=${sightingId} RETURNING *`;
-    const values = [updatedSighting.date_of_sighting, updatedSighting.location, updatedSighting.is_healthy, updatedSighting.sighter_email, updatedSighting.individual_id];
+    const query = `UPDATE sightings SET date_of_sighting=$1, location=$2, is_healthy=$3, sighter_email=$4, individual_id=$5 WHERE id=$6 RETURNING *`;
+    const values = [updatedSighting.date_of_sighting, updatedSighting.location, updatedSighting.is_healthy, updatedSighting.sighter_email, updatedSighting.individual_id, sightingId];
     try {
       const updated = await db.query(query, values);
       console.log(updated.rows[0]);

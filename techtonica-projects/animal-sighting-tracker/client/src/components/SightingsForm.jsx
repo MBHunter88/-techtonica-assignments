@@ -21,7 +21,6 @@ const SightingsForm = ({ onSubmit }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      {/* Date of Sighting Field */}
       <Form.Group controlId="date_of_sighting">
         <Form.Label>Date</Form.Label>
         <Form.Control
@@ -33,7 +32,6 @@ const SightingsForm = ({ onSubmit }) => {
         />
       </Form.Group>
 
-      {/* Location Field */}
       <Form.Group controlId="location">
         <Form.Label>Location</Form.Label>
         <Form.Control
@@ -45,7 +43,6 @@ const SightingsForm = ({ onSubmit }) => {
         />
       </Form.Group>
 
-      {/* Healthy Status Field */}
       <Form.Group controlId="is_healthy">
         <Form.Label>Healthy?</Form.Label>
         <Form.Control
@@ -57,7 +54,6 @@ const SightingsForm = ({ onSubmit }) => {
         />
       </Form.Group>
 
-      {/* Scientist Contact Field */}
       <Form.Group controlId="sighter_email">
         <Form.Label>Scientist Contact</Form.Label>
         <Form.Control

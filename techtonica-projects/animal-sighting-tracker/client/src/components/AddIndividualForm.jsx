@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-const IndividualForm = ({ onSubmit }) => {
+const AddIndividualForm = ({ onSubmit }) => {
   const [individual, setIndividual] = useState({ nickname: '', scientist: '' });
 
   const handleInputChange = (e) => {
@@ -45,4 +45,4 @@ const IndividualForm = ({ onSubmit }) => {
   );
 };
 
-export default IndividualForm;
+export default AddIndividualForm;

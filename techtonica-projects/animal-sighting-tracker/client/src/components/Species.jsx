@@ -70,11 +70,10 @@ const Species = () => {
             </React.Fragment>
           ))
         ) : (
-          // Render Individual component when a species is selected
           <Individual
             getPackName={getPackName}
             species={activeSpecies}
-            goBack={() => setActiveSpecies(null)} // Go back to species list
+            goBack={() => setActiveSpecies(null)} 
           />
         )}
       </div>

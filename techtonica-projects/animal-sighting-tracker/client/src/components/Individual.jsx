@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Modal } from 'react-bootstrap';
 import Sightings from './Sightings';
-import IndividualForm from './IndividualForm';
+import AddIndividualForm from './AddIndividualForm';
 
 const Individual = ({ species, goBack, getPackName }) => {
   const [individuals, setIndividuals] = useState([]);
@@ -32,7 +32,7 @@ const Individual = ({ species, goBack, getPackName }) => {
     setSelectedIndividual(individual); 
   };
 
-   // Handle form submission to add a new individual
+   // handler for adding a new individual
    const handleFormSubmit = async (formData) => {
     try {
       const response = await fetch(`http://localhost:8080/api/individuals`, {
@@ -45,21 +45,22 @@ const Individual = ({ species, goBack, getPackName }) => {
 
       if (response.ok) {
         const newIndividual = await response.json();
-        setIndividuals([...individuals, newIndividual]); // Add new individual to list
-        setShowIndividualModal(false);  // Close modal after submission
+        setIndividuals([...individuals, newIndividual]); 
+        setShowIndividualModal(false);  
       }
     } catch (error) {
       console.error('Error adding individual:', error);
     }
   };
 
-  // Show the modal to add a new individual
+  // show modal to add a new individual
   const handleAddIndividual = () => {
     setShowIndividualModal(true);
     setShowSightingModal(false);
   };
 
-   // Show the modal to add a new sighting
+   // show modal to add a new sighting
+   //TODO: move to sighting component for better organization 
    const handleAddSighting = () => {
     setShowSightingModal(true);
     setShowIndividualModal(false); 
@@ -103,13 +104,13 @@ const Individual = ({ species, goBack, getPackName }) => {
         style={{ marginTop: '2rem', marginLeft: '6.8rem'}}>
             Add to {getPackName(species.common_name)}
             </Button>
-            {/* Modal to add a new individual */}
+            
         <Modal show={showIndividualModal} onHide={() => setShowIndividualModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Add to {getPackName(species.common_name)}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <IndividualForm onSubmit={handleFormSubmit} />
+            <AddIndividualForm onSubmit={handleFormSubmit} />
           </Modal.Body>
         </Modal>
 
