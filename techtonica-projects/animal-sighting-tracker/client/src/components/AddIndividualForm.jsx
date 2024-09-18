@@ -38,6 +38,11 @@ const AddIndividualForm = ({ onSubmit }) => {
         />
       </Form.Group>
 
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Upload Image</Form.Label>
+        <Form.Control type="file" />
+      </Form.Group>
+
       <Button onClick={handleSubmit} variant="primary" type="submit">
         Add Individual
       </Button>

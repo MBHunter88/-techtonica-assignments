@@ -3,8 +3,9 @@ import { Button, Card } from 'react-bootstrap';
 import Individual from './Individual';
 
 const Species = () => {
+  //state management
   const [species, setSpecies] = useState([]);
-  const [activeSpecies, setActiveSpecies] = useState(null);
+  const [activeSpecies, setActiveSpecies] = useState(null); // `activeSpecies`: stores selected species to display its individuals.
 
   // Fetch species on page load
   useEffect(() => {
@@ -29,7 +30,7 @@ const Species = () => {
     setActiveSpecies(species); 
   };
 
-  //funtion to return name for button based on selected specie
+  //funtion to return a collective name for button based on selected specie
   function getPackName(commonName) {
     if (commonName === 'Red Wolf') return 'the Pack';
     if (commonName === 'Sloth Bear') return 'the Sleuth';
@@ -37,6 +38,7 @@ const Species = () => {
     return '';
   }
 
+  //if no species is selected then display all species, otherwise display the <Individual/> component
   return (
     <>
       <div className="species-card">

@@ -4,6 +4,7 @@ import Sightings from './Sightings';
 import AddIndividualForm from './AddIndividualForm';
 
 const Individual = ({ species, goBack, getPackName }) => {
+  //state management
   const [individuals, setIndividuals] = useState([]);
   const [selectedIndividual, setSelectedIndividual] = useState(null); 
   const [showIndividualModal, setShowIndividualModal] = useState(false);
@@ -53,19 +54,21 @@ const Individual = ({ species, goBack, getPackName }) => {
     }
   };
 
-  // show modal to add a new individual
+  // show modal to add a new individual and set the sighting modal to false so it won't display
   const handleAddIndividual = () => {
     setShowIndividualModal(true);
     setShowSightingModal(false);
   };
 
-   // show modal to add a new sighting
+   // show modal to add a new sighting and set the individual modal to false to it won't display
    //TODO: move to sighting component for better organization 
    const handleAddSighting = () => {
     setShowSightingModal(true);
     setShowIndividualModal(false); 
   };
 
+
+  //If no idividual is selected then display all or the sightings for the selected
   return (
     <>
     
@@ -83,6 +86,7 @@ const Individual = ({ species, goBack, getPackName }) => {
                 />
                       <Card.Body>
                           <Card.Title>{individual.nickname}</Card.Title>
+                          <Card.Text>Tracked by: {individual.scientist}</Card.Text>
                           <Button
                               className="btn btn-primary"
                               onClick={() => handleShowSightings(individual)}
