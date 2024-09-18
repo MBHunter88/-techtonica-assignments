@@ -270,7 +270,8 @@ app.get('/individuals/species/:species', async (req, res) => {
           individuals.id,
           individuals.nickname,
           individuals.scientist,
-          species.common_name
+          species.common_name,
+          individuals.image_url
         FROM individuals
         JOIN species ON individuals.species_id = species.id
         WHERE species.common_name = $1;

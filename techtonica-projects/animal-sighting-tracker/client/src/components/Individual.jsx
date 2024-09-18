@@ -75,6 +75,12 @@ const Individual = ({ species, goBack, getPackName }) => {
             individuals.map((individual) => (
             <div key={individual.id}>
                   <Card className="individual-card" style={{ width: '27em' }}>
+                  <Card.Img
+                  variant="top"
+                  src={`http://localhost:8080${individual.image_url}`}
+                  alt={individual.nickname}
+                  style={{ width: '100%', height: '100%', aspectRatio: '4/3', opacity: '100%' }}
+                />
                       <Card.Body>
                           <Card.Title>{individual.nickname}</Card.Title>
                           <Button
