@@ -95,7 +95,7 @@ const Individual = ({ species, goBack, getPackName }) => {
         {!selectedIndividual ? (
           individuals.map((individual) => (
             <div className="individual-card" key={individual.id}>
-              <Card style={{ width: '27em' }}>
+              <Card style={{ width: '27em', backgroundColor: 'beige' }}>
                 <Card.Img
                   variant="top"
                   src={`http://localhost:8080${individual.image_url}`}

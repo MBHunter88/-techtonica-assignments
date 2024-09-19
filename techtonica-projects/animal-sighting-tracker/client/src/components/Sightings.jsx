@@ -147,7 +147,7 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
       <div className="sightings">
         {sightings.length > 0 ? (
           sightings.map((item) => (
-            <Card className="sighting-card" key={item.sighting_id} style={{  width: '27em' }}>
+            <Card className="sighting-card" key={item.sighting_id} style={{  width: '27em', backgroundColor: 'beige' }}>
               <Card.Header>Nickname: {item.nickname}</Card.Header>
               <ListGroup variant="flush">
                 <ListGroup.Item>Healthy: {item.is_healthy ? 'Yes' : 'No'}</ListGroup.Item>
