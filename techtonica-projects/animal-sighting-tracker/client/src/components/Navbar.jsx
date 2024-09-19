@@ -1,28 +1,29 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Logo from '../assets/BlueTechtonicaWord.png'
+import Logo from '../assets/WBBLogo.png'
 
 
 function MyNavBar(props) {
 
   return (
     <>
-    <Navbar bg="dark" variant="dark" sticky="top">
+    <Navbar style={{ backgroundColor: 'beige' }} sticky="top">
       <Container>
         <Navbar.Brand href="/">
         <img
               src={Logo}
-              height="30"
-              className="d-lg-inline-block"
-              alt="React Bootstrap logo"
+              height="90"
+              width="100"
+              className="d-inline-block align-top"
             />
+          
         </Navbar.Brand>
-        <Nav.Link >Your Link</Nav.Link>
+        <h1>Wolf - Bear - Bee <span style={{ fontStyle: 'italic' }}>Guardians</span></h1>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="#login">Cristina Rodriguez</a>
+            Donate: <a href="https://www.redwolf.org/general-donation">Red Wolf Sanctuary</a><br/>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

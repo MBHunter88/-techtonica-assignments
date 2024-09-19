@@ -53,22 +53,22 @@ app.get('/api/species', async (req, res) => {
 });
 
 //READ species JOIN query (shows a count for how many individuals are tracked)
-app.get('/species/with-individual-counts', async (req, res) => {
-    try {
-      const result = await db.query(`
-        SELECT 
-          species.common_name,
-          species.scientific_name,
-          COUNT(individuals.id) AS individual_count
-        FROM species
-        LEFT JOIN individuals ON species.id = individuals.species_id
-        GROUP BY species.common_name, species.scientific_name;
-      `);
-      res.json(result);
-    } catch (err) {
-      res.status(500).send('Error fetching species with individual counts');
-    }
-  });
+// app.get('/species/with-individual-counts', async (req, res) => {
+//     try {
+//       const result = await db.query(`
+//         SELECT 
+//           species.common_name,
+//           species.scientific_name,
+//           COUNT(individuals.id) AS individual_count
+//         FROM species
+//         LEFT JOIN individuals ON species.id = individuals.species_id
+//         GROUP BY species.common_name, species.scientific_name;
+//       `);
+//       res.json(result);
+//     } catch (err) {
+//       res.status(500).send('Error fetching species with individual counts');
+//     }
+//   });
 
 //UPDATE species
 app.put('/api/species/:speciesId', async (req, res) =>{

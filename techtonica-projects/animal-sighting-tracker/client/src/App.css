@@ -1,87 +1,124 @@
 .App {
   min-height: 100vh;
-  background-color: rgb(238, 232, 232);
   margin: 5px;
+  background-image: url(client/src/assets/forest_background.jpg);
 }
 
-.mybody {
-  display: flex;
-  gap: 3em;
-  padding: 1em;
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('https://img.freepik.com/free-vector/flat-design-forest-landscape_23-2149161398.jpg?t=st=1726710527~exp=1726714127~hmac=e839a2db5ffbc82af96aa32373683f1ddc0e75b8127905c7ef9346f30e2385a5&w=996');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  font-size: 16px;
+  color: #333;
 }
 
 a.navbar-brand {
-  margin-inline-start: -5em;
+  margin-inline-start: -7.5em;
 }
 
-.nav-link {
-  color: white !important;
-  margin-left: 5em;
+a.navbar-brand:hover {
+  transform: scale(2.05); /* Slight zoom */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
 }
 
-.species-card {
+.species-card, .individual-card, .sighting-card {
   display: flex;
-  margin-top: 50px;
-  margin-left: 6.5em;
-  gap: 2.5em;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+  gap: 2rem; 
+  margin-top: 2rem;
+  padding: 0 1.5rem;
+  margin-left: 1.2rem;
+ 
 }
 
-.individual-card {
+.individuals, .sightings {
   display: flex;
+  flex-wrap: wrap; /* Allows the cards to wrap into rows */
+  justify-content: flex-start; /* Aligns the cards to the left */
+  gap: 2em; /* Creates space between the cards */
   margin-top: 50px;
-  margin-left: 6.5em;
-  gap: 2.5em;
 }
 
-.species-card-body  {
-  background-color: rgba(255, 255, 255, 0.555);
-  margin-top: 30px;
+.individual-card, .sighting-card {
+  flex: 0 1 27rem; 
 }
-
-ul {
-  list-style-type: none;
+.each-card {
+  background-color: #45A049;
 }
-
-
-form {
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-  margin-top: 3em;
-  flex: 1;
-}
-
-input[type=text] {
-  display: inline-block;
-  margin-top: -10px;
+.card {
+  height: auto;
   width: 100%;
-  font-size: 15px;
-  border-radius: 2px;
-  border: 3px solid #98d0f1
+  padding: 1.5rem;
+  border-radius: 10px; /* Add subtle rounding to cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add light shadow for depth */
+  background-color:beige;
 }
 
-button.btn.btn-primary {
-  margin-top: 25px;
+.btn {
+  margin-top: 1rem;
+}
+
+.card-header {
+  background-color: #f0f8ff; /* Light blue for headers */
+  color: #333; /* Dark text */
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background-color: #4CAF50; /* Green for primary actions */
+  border-color: #4CAF50;
+ 
+}
+
+.btn-primary:hover {
+  background-color: #45A049; /* Slightly darker on hover */
 }
 
 
-.myicon {
-  stroke: rgb(243, 121, 7);
-  color: rgb(243, 121, 7);
-  stroke-width: 10;
-  margin-right: 0.9em;
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.form-label {
-  margin-bottom: 0 !important;
-  margin-top: 0.5em;
+p, .card-text {
+  line-height: 1.6; /* Increase line-height for better readability */
 }
 
-.form-check {
-  margin-top: 1em;
+.card:hover {
+  transform: scale(1.05); /* Slight zoom */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
 }
 
-.card-body {
-  margin-left: 2em;
-  margin-right: 2em;
+.btn:hover {
+  opacity: 0.9; /* Slight opacity change on hover */
+}
+
+.card {
+  min-height: 300px; /* Ensure cards are the same height */
+  max-width: 100%; /* Cards should be responsive */
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover; /* Ensures image covers the full space without stretching */
+}
+
+@media (max-width: 768px) {
+  .species-card .card, .individual-card .card {
+    flex: 0 1 45%; /* Fit two cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .species-card .card, .individual-card .card {
+    flex: 0 1 100%; /* Fit one card per row on mobile */
+  }
 }

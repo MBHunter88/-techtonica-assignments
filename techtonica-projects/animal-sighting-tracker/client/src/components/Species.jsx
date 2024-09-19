@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Container } from 'react-bootstrap';
 import Individual from './Individual';
 
 const Species = () => {
@@ -34,7 +34,7 @@ const Species = () => {
   function getPackName(commonName) {
     if (commonName === 'Red Wolf') return 'the Pack';
     if (commonName === 'Sloth Bear') return 'the Sleuth';
-    if (commonName === 'Rust Patched Bumble Bee') return 'the Hive';
+    if (commonName === 'Rusty Patched Bumble Bee') return 'the Hive';
     return '';
   }
 
@@ -45,7 +45,7 @@ const Species = () => {
         {!activeSpecies ? (
           species.map((item) => (
             <React.Fragment key={item.id}>
-              <Card style={{ width: '27em' }}>
+              <Card  style={{ width: '27em', backgroundColor: 'beige' }}>
                 <Card.Img
                   variant="top"
                   src={`http://localhost:8080${item.image_url}`}
@@ -68,15 +68,18 @@ const Species = () => {
                     Meet {getPackName(item.common_name)}
                   </Button>
                 </Card.Body>
+                <Card.Footer className="text-muted">{item.description}</Card.Footer>
               </Card>
             </React.Fragment>
           ))
         ) : (
+         
           <Individual
             getPackName={getPackName}
             species={activeSpecies}
             goBack={() => setActiveSpecies(null)} 
           />
+       
         )}
       </div>
     </>

@@ -71,50 +71,67 @@ const Individual = ({ species, goBack, getPackName }) => {
   //If no idividual is selected then display all or the sightings for the selected
   return (
     <>
-    
-      <div >
-     
-        {!selectedIndividual  ? (
-            individuals.map((individual) => (
-            <div key={individual.id}>
-                  <Card className="individual-card" style={{ width: '27em' }}>
-                  <Card.Img
+
+{selectedIndividual == null && (
+          <div className="button-container">
+            <Button
+              className="btn btn-primary"
+              onClick={handleAddIndividual}
+              style={{ marginTop: '2rem', margin: 'auto',  }}
+            >
+              Add to {getPackName(species.common_name)}
+            </Button>
+          </div>
+        )}
+<br/>
+{selectedIndividual == null && (
+          <div className="button-container">
+            <Button onClick={goBack} className="btn btn-secondary" 
+            style={{ marginTop: '2rem', margin: 'auto'}}>
+              Back to Species List
+            </Button>
+          </div>
+        )}
+
+      <div className="individuals">
+        {!selectedIndividual ? (
+          individuals.map((individual) => (
+            <div className="individual-card" key={individual.id}>
+              <Card style={{ width: '27em' }}>
+                <Card.Img
                   variant="top"
                   src={`http://localhost:8080${individual.image_url}`}
                   alt={individual.nickname}
                   style={{ width: '100%', height: '100%', aspectRatio: '4/3', opacity: '100%' }}
                 />
-                      <Card.Body>
-                          <Card.Title>{individual.nickname}</Card.Title>
-                          <Card.Text>Tracked by: {individual.scientist}</Card.Text>
-                          <Button
-                              className="btn btn-primary"
-                              onClick={() => handleShowSightings(individual)}
-                          >
-                              View Sightings
-                          </Button>
-                      </Card.Body>
-                  </Card>
+                <Card.Body>
+                  <Card.Title>{individual.nickname}</Card.Title>
+                  <Card.Text>Tracked by: {individual.scientist}
                  
-              </div>
-              
+                  </Card.Text>
+                  <Button
+                    className="btn btn-primary"
+                    onClick={() => handleShowSightings(individual)}
+                  >
+                    View Sightings
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
           ))
         ) : (
-         <Sightings
+          <Sightings
             individual={selectedIndividual}
-            goBack={() => setSelectedIndividual(null)} 
+            goBack={() => setSelectedIndividual(null)}
             handleAddSighting={handleAddSighting}
             showSightingModal={showSightingModal}
             setShowSightingModal={setShowSightingModal}
             selectedIndividual={selectedIndividual}
           />
         )}
-           <Button className="btn btn-primary" 
-        onClick={handleAddIndividual}
-        style={{ marginTop: '2rem', marginLeft: '6.8rem'}}>
-            Add to {getPackName(species.common_name)}
-            </Button>
-            
+
+     
+        
         <Modal show={showIndividualModal} onHide={() => setShowIndividualModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Add to {getPackName(species.common_name)}</Modal.Title>
@@ -123,14 +140,12 @@ const Individual = ({ species, goBack, getPackName }) => {
             <AddIndividualForm onSubmit={handleFormSubmit} />
           </Modal.Body>
         </Modal>
-
-        <Button onClick={goBack} className="btn btn-secondary" style={{ marginTop: '2rem', marginLeft: '6.8rem' }}>
-          Back to Species List
-        </Button>
-       
+  
+      
       </div>
     </>
   );
+  
 };
 
 export default Individual;

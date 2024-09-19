@@ -123,10 +123,33 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
   //render sightings in cards for each sighting with edit and delete buttons, if no sighting display message 
   return (
     <>
-      <div className="sightings-container">
+
+      <div className="button-container">
+          <Button 
+            onClick={() => setShowSightingModal(true)} 
+            className="btn btn-success"
+            style={{ marginTop: '2rem', margin: 'auto'}} 
+          >
+            Add New Sighting
+          </Button>
+        </div>
+        <br/>
+
+        <div className="button-container">
+          <Button 
+            onClick={goBack} 
+            className="btn btn-secondary"  
+            style={{ marginTop: '2rem', margin: 'auto' }}
+          >
+            Back
+          </Button>
+        </div>
+      
+
+      <div className="sightings">
         {sightings.length > 0 ? (
           sightings.map((item) => (
-            <Card key={item.sighting_id} style={{ width: '18rem', marginBottom: '1rem' }}>
+            <Card className="sighting-card" key={item.sighting_id} style={{  width: '27em' }}>
               <Card.Header>Nickname: {item.nickname}</Card.Header>
               <ListGroup variant="flush">
                 <ListGroup.Item>Healthy: {item.is_healthy ? 'Yes' : 'No'}</ListGroup.Item>
@@ -135,34 +158,30 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
                 <ListGroup.Item>Contact: {item.sighter_email}</ListGroup.Item>
                 <ListGroup.Item>Date: {new Date(item.date_of_sighting).toLocaleDateString()}</ListGroup.Item>
               </ListGroup>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6em 0' }}>
-          <Button 
-            variant="outline-warning" 
-            onClick={() => handleEditClick(item)} 
-            style={{ padding: '0.6em', marginLeft: '3em'}}
-          >
-            Edit <ioicons.IoPencil />
-          </Button>
-          <Button 
-            variant="outline-danger" 
-            onClick={() => handleDeleteSighting(item.sighting_id)} 
-            style={{ padding: '0.6em', marginRight: '3em' }}
-          >
-            Delete <ioicons.IoTrash />
-          </Button>
-        </div>
-                        
-                     
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6em 0', gap: '1em' }}>
+                <Button 
+                  variant="outline-warning" 
+                  onClick={() => handleEditClick(item)} 
+                  style={{ padding: '0.6em' }}
+                >
+                  Edit <ioicons.IoPencil />
+                </Button>
+                <Button 
+                  variant="outline-danger" 
+                  onClick={() => handleDeleteSighting(item.sighting_id)} 
+                  style={{ padding: '0.6em' }}
+                >
+                  Delete <ioicons.IoTrash />
+                </Button>
+              </div>
             </Card>
           ))
         ) : (
           <p>No sightings found for this individual.</p>
         )}
-
-        <Button onClick={() => setShowSightingModal(true)} className="btn btn-success mt-3">
-          Add New Sighting
-        </Button>
-
+  
+      
+  
         {/* Modal to add new sighting */}
         <Modal show={showSightingModal} onHide={() => setShowSightingModal(false)}>
           <Modal.Header closeButton>
@@ -172,26 +191,26 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
             <AddSightingForm onSubmit={handleFormSubmit} />
           </Modal.Body>
         </Modal>
- {/* Modal to edit sighting */}
+  
+        {/* Modal to edit sighting */}
         <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Sighting</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <EditSightingForm 
-  onSubmit={handleEditFormSubmit} 
-  formData={formData} 
-  setFormData={setFormData} 
-  setShowEditModal={setShowEditModal} 
-/>           
+              onSubmit={handleEditFormSubmit} 
+              formData={formData} 
+              setFormData={setFormData} 
+              setShowEditModal={setShowEditModal} 
+            />
           </Modal.Body>
         </Modal>
-        <Button onClick={goBack} className="btn btn-secondary" style={{ marginTop: '1rem' }}>
-         Back
-        </Button>
+  
       </div>
     </>
   );
+  
 };
 
 export default Sightings;
