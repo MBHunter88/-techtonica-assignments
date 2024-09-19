@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+.homemade-apple-regular {
+  font-family: "Homemade Apple", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Homemade Apple", cursive;
+}
+
 .App {
   min-height: 100vh;
   margin: 5px;
@@ -72,16 +84,26 @@ a.navbar-brand:hover {
 }
 
 .btn-primary {
-  background-color: #4CAF50; /* Green for primary actions */
-  border-color: #4CAF50;
+  background-color: #418a44 !important; /* Green for primary actions */
+  border-color: #4CAF50 !important;
+  font-size: larger !important;
  
 }
 
-.btn-primary:hover {
-  background-color: #45A049; /* Slightly darker on hover */
+.btn-secondary {
+  background-color: #6a6767 !important;
+  border-color: #a2a2a2 !important;
 }
 
+.btn-primary:hover {
+  background-color: #45A049 !important; /* Slightly darker on hover */
+}
 
+.add-to-btn {
+  background-color: rgb(182, 160, 38) !important;
+  border-color: rgb(182, 160, 38) !important;
+  font-size: larger !important;
+}
 
 h1, h2, h3 {
   font-weight: 700;

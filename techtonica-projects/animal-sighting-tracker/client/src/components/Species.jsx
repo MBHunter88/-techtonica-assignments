@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Container } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Individual from './Individual';
 
 const Species = () => {
@@ -12,13 +12,11 @@ const Species = () => {
     const fetchSpecies = async () => {
       try {
         const response = await fetch(`http://localhost:8080/api/species`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
         const data = await response.json();
         setSpecies(data);
       } catch (error) {
-        console.error('Error fetching species:', error);
+        console.error('Error fetching species:', error.message);
+        throw error;
       }
     };
 
@@ -38,14 +36,15 @@ const Species = () => {
     return '';
   }
 
+  
+
   //if no species is selected then display all species, otherwise display the <Individual/> component
   return (
     <>
       <div className="species-card">
         {!activeSpecies ? (
           species.map((item) => (
-            <React.Fragment key={item.id}>
-              <Card  style={{ width: '27em', backgroundColor: 'beige' }}>
+              <Card key={item.id || item.common_name} style={{ width: '27em', backgroundColor: 'beige' }}>
                 <Card.Img
                   variant="top"
                   src={`http://localhost:8080${item.image_url}`}
@@ -69,8 +68,7 @@ const Species = () => {
                   </Button>
                 </Card.Body>
                 <Card.Footer className="text-muted">{item.description}</Card.Footer>
-              </Card>
-            </React.Fragment>
+              </Card>       
           ))
         ) : (
          

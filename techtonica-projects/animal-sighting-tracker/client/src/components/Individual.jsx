@@ -15,13 +15,11 @@ const Individual = ({ species, goBack, getPackName }) => {
     const fetchIndividuals = async () => {
       try {
         const response = await fetch(`http://localhost:8080/individuals/species/${species.common_name}`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
         const data = await response.json();
         setIndividuals(data);
       } catch (error) {
-        console.error('Error fetching individuals:', error);
+        console.error('Error fetching individuals:', error.message);
+        throw error;
       }
     };
 
@@ -75,7 +73,7 @@ const Individual = ({ species, goBack, getPackName }) => {
 {selectedIndividual == null && (
           <div className="button-container">
             <Button
-              className="btn btn-primary"
+              className="add-to-btn"
               onClick={handleAddIndividual}
               style={{ marginTop: '2rem', margin: 'auto',  }}
             >

@@ -17,13 +17,11 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
     const fetchSightings = async () => {
       try {
         const response = await fetch(`http://localhost:8080/api/sightings/individuals/${individual.nickname}`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
         const data = await response.json();
         setSightings(data.length > 0 ? data : []);
       } catch (error) {
-        console.error('Error fetching sightings:', error);
+        console.error('Error fetching sightings:', error.message);
+        throw error;
         setSightings([]);
       }
     };
@@ -127,7 +125,7 @@ const Sightings = ({ individual, goBack, showSightingModal, setShowSightingModal
       <div className="button-container">
           <Button 
             onClick={() => setShowSightingModal(true)} 
-            className="btn btn-success"
+            className="add-to-btn"
             style={{ marginTop: '2rem', margin: 'auto'}} 
           >
             Add New Sighting

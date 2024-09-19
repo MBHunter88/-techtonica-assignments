@@ -19,7 +19,7 @@ function MyNavBar(props) {
             />
           
         </Navbar.Brand>
-        <h1>Wolf - Bear - Bee <span style={{ fontStyle: 'italic' }}>Guardians</span></h1>
+        <h1>Wolf - Bear - Bee </h1>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>

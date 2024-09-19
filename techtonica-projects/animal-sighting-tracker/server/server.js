@@ -157,7 +157,7 @@ app.get('/api/sightings', async (req, res) => {
     }
 });
 
-//READ sighting JOIN query that filters based on species
+//READ sighting JOIN query that filters sightings based on individual nickname
 app.get('/api/sightings/individuals/:nickname', async (req, res) => {
     const nickname = req.params.nickname;
   
@@ -217,7 +217,7 @@ app.delete('/api/sightings/:sightingId', async (req, res) => {
         const sightingId = req.params.sightingId;
         await db.query('DELETE FROM sightings WHERE id=$1', [sightingId]);
         console.log("From the delete request-url", sightingId);
-        res.status(200).end();
+        res.status(204).end();
     } catch (e) {
         console.log(e);
         return res.status(400).json({ e });
@@ -325,3 +325,5 @@ app.delete('/api/individuals/:individualId', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Hola, Server listening on ${PORT}`);
 });
+
+module.exports = app;
