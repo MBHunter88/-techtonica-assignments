@@ -32,7 +32,8 @@ This project was built using the following technologies:
 
 ## Preview
 
-![short demo of web application](client/public/wolf-bear-bee.png)
+
+![\[!\[YouTube\](http://i.ytimg.com/vi/gtyxt0ZVyH4/hqdefault.jpg)\](https://www.youtube.com/watch?v=gtyxt0ZVyH4)](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2kxOHA0ZWI1Nnk3c3o1ODBlbTc3dnZ6dnIyZnA0cW5sMDFybTJ6diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HVx2lQhWyOfxM6T427/giphy.gif)
 
 ## Setup and Installation
 
@@ -129,3 +130,6 @@ Contributions are welcome! Please follow these steps:
 
 ## License
 This project is licensed under the MIT License.
+
+
+[https://youtu.be/gtyxt0ZVyH4]: https://youtu.be/gtyxt0ZVyH4
