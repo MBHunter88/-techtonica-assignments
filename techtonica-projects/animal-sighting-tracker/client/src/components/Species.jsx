@@ -53,7 +53,7 @@ const Species = () => {
   return (
     <>
    {!activeSpecies && <div className='blurb'>
-      <h2>Wolf, Bear, Bee...<span style={{fontFamily: 'Homemade Apple'}}>{titleText}</span></h2>
+      <h2>Wolf, Bear, Bee... <span style={{fontFamily: 'Homemade Apple'}}>{titleText}</span></h2>
       <p>Join us in tracking and protecting endangered species! This app allows you to monitor sightings of
          the Red Wolf, Sloth Bear, and Rust Patched Bumble Bee. Explore detailed information on individual animals,
           add new sightings, and help us contribute to their conservation. Together, we can safeguard the future of these incredible creatures.</p>
@@ -61,7 +61,7 @@ const Species = () => {
       <div className="species-card">
         {!activeSpecies ? (
           species.map((item) => (
-              <Card key={item.id || item.common_name} style={{ width: '27em', backgroundColor: 'beige' }}>
+              <Card key={item.id} style={{ width: '27em', backgroundColor: 'beige' }}>
                 <Card.Img
                   variant="top"
                   src={`http://localhost:8080${item.image_url}`}

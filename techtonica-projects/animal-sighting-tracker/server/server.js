@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 // ----------------------------CRUD for 'species' table----------------------------------------------//
 
-//CREATE species
+//TODO: CREATE species
 // app.post('/api/species', async (req, res) => {
 //     try {
 //         const newSpecies = {
@@ -52,7 +52,7 @@ app.get('/api/species', async (req, res) => {
     }
 });
 
-//READ species JOIN query (shows a count for how many individuals are tracked)
+//TODO: READ species JOIN query (shows a count for how many individuals are tracked)
 // app.get('/species/with-individual-counts', async (req, res) => {
 //     try {
 //       const result = await db.query(`
@@ -70,7 +70,8 @@ app.get('/api/species', async (req, res) => {
 //     }
 //   });
 
-//UPDATE species
+
+// TODO: UPDATE species
 // app.put('/api/species/:speciesId', async (req, res) =>{
 //     const speciesId = req.params.speciesId
 //     const updatedSpecies = {
@@ -94,7 +95,7 @@ app.get('/api/species', async (req, res) => {
 //     }
 //   })
 
-// //DELETE species
+// TODO: DELETE species
 // app.delete('/api/species/:speciesId', async (req, res) => {
 //     try {
 //         const speciesId = req.params.speciesId;
@@ -282,7 +283,8 @@ app.get('/individuals/species/:species', async (req, res) => {
     }
   });
 
-// //UPDATE individual
+
+// TODO: UPDATE individual
 // app.put('/api/individuals/:individualId', async (req, res) =>{
 //     const individualId = req.params.individualId
 //     const updatedIndividual = {
@@ -305,7 +307,7 @@ app.get('/individuals/species/:species', async (req, res) => {
 //     }
 //   })
 
-// //DELETE individual
+// TODO: DELETE individual
 // app.delete('/api/individuals/:individualId', async (req, res) => {
 //     try {
 //         const individualId = req.params.individualId;

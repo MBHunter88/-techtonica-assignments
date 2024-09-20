@@ -54,7 +54,7 @@ import { jest } from '@testing-library/jest-dom'
     });
   
     // Assert
-    expect(button).toBeTruthy();
+    expect(button).toHaveTextContent('the Pack');
   
     // ACT
     fireEvent.click(button);
