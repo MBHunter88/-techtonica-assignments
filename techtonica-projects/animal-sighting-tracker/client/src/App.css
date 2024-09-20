@@ -33,6 +33,23 @@ a.navbar-brand:hover {
   transform: scale(2.05); /* Slight zoom */
   transition: transform 0.3s ease-in-out; /* Smooth transition */
 }
+.blurb {
+font-size: larger;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+   
+  margin-top: 2rem;
+  padding: 0 1.5rem;
+  margin-left: 1.2rem;
+  background-color: beige;
+  border-radius: 8px;
+}
+
+.blurb h2 {
+  margin-top: 2rem;
+ 
+}
 
 .species-card, .individual-card, .sighting-card {
   display: flex;

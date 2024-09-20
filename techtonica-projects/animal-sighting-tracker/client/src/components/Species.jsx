@@ -6,6 +6,7 @@ const Species = () => {
   //state management
   const [species, setSpecies] = useState([]);
   const [activeSpecies, setActiveSpecies] = useState(null); // `activeSpecies`: stores selected species to display its individuals.
+  const [titleText, setTitleText] = useState('an advocate')
 
   // Fetch species on page load
   useEffect(() => {
@@ -36,11 +37,27 @@ const Species = () => {
     return '';
   }
 
-  
+  //function to iterate through text to change dynamically based on time
+  useEffect(() => {
+    let index = 0;
+    const intervalId = setInterval(() => {
+      const newTitleText = ['a guardian', 'the difference', 'what they need']
+      setTitleText(newTitleText[index]);
+      index = (index + 1) % newTitleText.length
+    }, 2000); // Update every 2 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
 
   //if no species is selected then display all species, otherwise display the <Individual/> component
   return (
     <>
+    <div className='blurb'>
+      <h2>Wolf, Bear, Bee...<span style={{fontFamily: 'Homemade Apple'}}>{titleText}</span></h2>
+      <p>Join us in tracking and protecting endangered species! This app allows you to monitor sightings of
+         the Red Wolf, Sloth Bear, and Rust Patched Bumble Bee. Explore detailed information on individual animals,
+          add new sightings, and help us contribute to their conservation. Together, we can safeguard the future of these incredible creatures.</p>
+    </div>
       <div className="species-card">
         {!activeSpecies ? (
           species.map((item) => (
