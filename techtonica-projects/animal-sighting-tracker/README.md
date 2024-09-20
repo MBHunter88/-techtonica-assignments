@@ -2,7 +2,7 @@
 # Wolf-Bear-Bee 
 
 ## Project Overview
-**Wolf-Bear-Bee ** is a full-stack web application designed to track endangered species, focusing on the Red Wolf, Sloth Bear, and Rusty Patched Bumble Bee. This app allows scientists to track individual animals, add sightings, and monitor their health and status in the wild. The project is built using the PERN stack (PostgreSQL, Express, React, and Node.js).
+**Wolf-Bear-Bee** is a full-stack web application designed to track endangered species, focusing on the Red Wolf, Sloth Bear, and Rusty Patched Bumble Bee. This app allows scientists to track individual animals, add sightings, and monitor their health and status in the wild. The project is built using the PERN stack (PostgreSQL, Express, React, and Node.js).
 
 ## Features
 - View species, individuals, and sightings in a clean and intuitive UI.
