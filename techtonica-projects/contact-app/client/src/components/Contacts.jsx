@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ViewContact from './ViewContact';
+import ContactForm from './ContactForm';
 
 const Contacts = () => {
     //state management 
@@ -7,6 +8,8 @@ const Contacts = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedContactId, setSelectedContactId] = useState(null);
+
+    
 
     //fetch contacts on page load
     useEffect(() => {
@@ -28,6 +31,23 @@ const Contacts = () => {
         fetchContacts();
     }, []);
 
+    // Add new contact
+    const addContact = async (newContact) => {
+        const response = await fetch('/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newContact),
+        });
+        const data = await response.json();
+        setContacts([...contacts, data]);
+    };
+
+
+    // Delete contact
+    const deleteContact = async (id) => {
+        await fetch(`/contacts/${id}`, { method: 'DELETE' });
+        setContacts(contacts.filter(contact => contact.id !== id));
+    }
     const handleViewDetails = (id) => {
         setSelectedContactId(id);
     };
@@ -42,25 +62,27 @@ const Contacts = () => {
 
     return (
         <div>
-            {selectedContactId == null && (
-          <div className="button-container">
-            <button>Add New</button>
-          </div>
+          {selectedContactId == null && (
+            <div className="button-container">
+                <ContactForm addContact={addContact} />
+            </div>
         )}
              {!selectedContactId ? (
                 <ul>
                     {contacts.map(contact => (
-                        <li key={contact.id}>
+                        <><li key={contact.id}>
                             <p>Name: {contact.name}</p>
                             <p>Email: {contact.email}</p>
                             <p>Phone: {contact.phone}</p>
                             <button onClick={() => handleViewDetails(contact.id)}>View Details</button>
-                        </li>
+                        </li><button onClick={() => deleteContact(contact.id)}>Delete</button></>
                     ))}
                 </ul>
                 
             ) : (
-                <ViewContact contactId={selectedContactId} />
+                <ViewContact contactId={selectedContactId}
+                setSelectedContactId={setSelectedContactId}
+                setContacts={setContacts} />
             )}
            
         </div>

@@ -28,7 +28,7 @@ app.get('/contacts/:id', async (req, res) => {
         const { id } = req.params;
         const query = `
             SELECT contacts.id, contacts.name, contacts.email, contacts.phone, contacts.notes,
-                   locations.address, locations.city, locations.state, locations.country
+                   locations.address, locations.city, locations.state
             FROM contacts
             LEFT JOIN locations ON contacts.id = locations.contact_id
             WHERE contacts.id = $1;
@@ -46,12 +46,12 @@ app.get('/contacts/:id', async (req, res) => {
 //endpoint to add new contact
 app.post('/contacts', async (req, res) => {
     try {
-        const { name, email, phone, notes, address, city, state, country } = req.body;
+        const { name, email, phone, notes, address, city, state } = req.body;
         const contactQuery = 'INSERT INTO contacts (name, email, phone, notes) VALUES ($1, $2, $3, $4) RETURNING id';
         const contactResult = await db.query(contactQuery, [name, email, phone, notes]);
 
-        const locationQuery = 'INSERT INTO locations (contact_id, address, city, state, country) VALUES ($1, $2, $3, $4, $5)';
-        await db.query(locationQuery, [contactResult.rows[0].id, address, city, state, country]);
+        const locationQuery = 'INSERT INTO locations (contact_id, address, city, state) VALUES ($1, $2, $3, $4)';
+        await db.query(locationQuery, [contactResult.rows[0].id, address, city, state]);
 
         res.status(201).json({ message: 'Contact added successfully' });
     } catch (e) {
@@ -64,13 +64,13 @@ app.post('/contacts', async (req, res) => {
 app.put('/contacts/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, phone, notes, address, city, state, country } = req.body;
+        const { name, email, phone, notes, address, city, state } = req.body;
 
         const contactQuery = 'UPDATE contacts SET name = $1, email = $2, phone = $3, notes = $4 WHERE id = $5';
         await db.query(contactQuery, [name, email, phone, notes, id]);
 
-        const locationQuery = 'UPDATE locations SET address = $1, city = $2, state = $3, country = $4 WHERE contact_id = $5';
-        await db.query(locationQuery, [address, city, state, country, id]);
+        const locationQuery = 'UPDATE locations SET address = $1, city = $2, state = $3 WHERE contact_id = $4';
+        await db.query(locationQuery, [address, city, state, id]);
 
         res.json({ message: 'Contact updated successfully' });
 

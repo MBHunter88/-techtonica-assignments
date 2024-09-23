@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ContactForm from './ContactForm';
 
-const ViewContact = ({ contactId }) => {
+const ViewContact = ({ contactId, setSelectedContactId }) => {
     const [contactDetails, setContactDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,19 +16,41 @@ const ViewContact = ({ contactId }) => {
                 } else if (response.status >= 400) {
                     throw new Error('Network response was not ok');
                 }
-                
+
                 const data = await response.json();
                 setContactDetails(data);
             } catch (error) {
                 setError(error.message);
             } finally {
                 setLoading(false);
-                setError(false)
             }
         };
 
         fetchContactDetails();
     }, [contactId]);
+
+    // Update existing contact
+    const updateContact = async (id, updatedContact) => {
+        console.log('Updating contact with data:', updatedContact);
+        try {
+            const response = await fetch(`http://localhost:8080/contacts/${id}`, {  // Correct full URL
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedContact),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update contact');
+            }
+
+            const updated = await response.json();
+
+            // Render the updated contact in the ViewContact component
+            setContactDetails(updated);
+        } catch (error) {
+            console.error('Error updating contact:', error.message);
+        }
+    };
 
     if (loading) {
         return <p>Loading contact details...</p>;
@@ -50,12 +73,11 @@ const ViewContact = ({ contactId }) => {
                 <li><p>Address: {contactDetails.address}</p></li>
                 <li><p>City: {contactDetails.city}</p></li>
                 <li><p>State: {contactDetails.state}</p></li>
-                <li><p>Country: {contactDetails.country}</p></li>
                 <li><p>Notes: {contactDetails.notes}</p></li>
-                <button>Edit</button>
-                <button>Delete</button>
             </ul>
-            <button>Back</button>
+            {/* Pass the updateContact function and the current contact details to ContactForm */}
+            <ContactForm updateContact={updateContact} contactToEdit={contactDetails} setContactDetails={setContactDetails}  />
+            <button onClick={() => setSelectedContactId(null)}>Back</button>
         </div>
     );
 }

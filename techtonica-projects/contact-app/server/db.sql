@@ -66,8 +66,8 @@ CREATE TABLE public.locations (
     contact_id integer,
     address character varying(200),
     city character varying(100),
-    state character varying(50),
-    country character varying(100)
+    state character varying(50)
+   
 );
 
 
