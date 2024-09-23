@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+.homemade-apple-regular {
+  font-family: "Homemade Apple", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Homemade Apple", cursive;
+}
+
+.App {
+  min-height: 100vh;
+  margin: 5px;
+  background-image: url(client/src/assets/forest_background.jpg);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('https://img.freepik.com/free-vector/flat-design-forest-landscape_23-2149161398.jpg?t=st=1726710527~exp=1726714127~hmac=e839a2db5ffbc82af96aa32373683f1ddc0e75b8127905c7ef9346f30e2385a5&w=996');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  font-size: 16px;
+  color: #333;
+}
+
+a.navbar-brand {
+  margin-inline-start: -7.5em;
+}
+
+a.navbar-brand:hover {
+  transform: scale(2.05); /* Slight zoom */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+.blurb {
+font-size: larger;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+   
+  margin-top: 2rem;
+  padding: 0 1.5rem;
+  margin-left: 1.2rem;
+  background-color: beige;
+  border-radius: 8px;
+}
+
+.blurb h2 {
+  margin-top: 2rem;
+ 
+}
+
+.species-card, .individual-card, .sighting-card {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+  gap: 2rem; 
+  margin-top: 2rem;
+  padding: 0 1.5rem;
+  margin-left: 1.2rem;
+ 
+}
+
+.individuals, .sightings {
+  display: flex;
+  flex-wrap: wrap; /* Allows the cards to wrap into rows */
+  justify-content: flex-start; /* Aligns the cards to the left */
+  gap: 2em; /* Creates space between the cards */
+  margin-top: 50px;
+}
+
+.individual-card, .sighting-card {
+  flex: 0 1 27rem; 
+}
+.each-card {
+  background-color: #45A049;
+}
+.card {
+  height: auto;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 10px; /* Add subtle rounding to cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add light shadow for depth */
+  background-color:beige;
+}
+
+.btn {
+  margin-top: 1rem;
+}
+
+.card-header {
+  background-color: #f0f8ff; /* Light blue for headers */
+  color: #333; /* Dark text */
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background-color: #418a44 !important; /* Green for primary actions */
+  border-color: #4CAF50 !important;
+  font-size: larger !important;
+ 
+}
+
+.btn-secondary {
+  background-color: #6a6767 !important;
+  border-color: #a2a2a2 !important;
+}
+
+.btn-primary:hover {
+  background-color: #45A049 !important; /* Slightly darker on hover */
+}
+
+.add-to-btn {
+  background-color: rgb(182, 160, 38) !important;
+  border-color: rgb(182, 160, 38) !important;
+  font-size: larger !important;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+p, .card-text {
+  line-height: 1.6; /* Increase line-height for better readability */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slight zoom */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.btn:hover {
+  opacity: 0.9; /* Slight opacity change on hover */
+}
+
+.card {
+  min-height: 300px; /* Ensure cards are the same height */
+  max-width: 100%; /* Cards should be responsive */
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover; /* Ensures image covers the full space without stretching */
+}
+
+@media (max-width: 768px) {
+  .species-card .card, .individual-card .card {
+    flex: 0 1 45%; /* Fit two cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .species-card .card, .individual-card .card {
+    flex: 0 1 100%; /* Fit one card per row on mobile */
+  }
+}
