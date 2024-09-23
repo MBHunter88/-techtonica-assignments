@@ -117,7 +117,7 @@ COPY public.contacts (id, name, email, phone, notes) FROM stdin;
 1	John Doe	john@example.com	123-456-7890	Client prefers email.
 2	Jane Smith	jane@example.com	987-654-3210	Referred by a friend.
 3	Alice Johnson	alice@example.com	555-666-7777	
-4	Michael Brown	michael@example.com	444-333-2222	Met at a conference.
+4	Louis Brown	louis@example.com	444-333-2222	Met at a conference.
 5	Emily Davis	emily@example.com	999-888-7777	Works in tech.
 \.
 
