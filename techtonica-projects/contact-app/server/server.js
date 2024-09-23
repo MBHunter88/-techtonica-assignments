@@ -10,9 +10,14 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// creates an endpoint for the route "/""
-app.get('/', (req, res) => {
-    res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+//READ contacts
+app.get('/contacts', async (req, res) => {
+    try {
+        const { rows: contacts } = await db.query('SELECT * FROM contacts');
+        res.send(contacts);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
 });
 
 // console.log that your server is up and running
