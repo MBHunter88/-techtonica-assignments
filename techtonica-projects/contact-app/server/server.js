@@ -96,3 +96,6 @@ app.delete('/contacts/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Yo, Server listening on ${PORT}`);
 });
+
+//export for testing
+module.exports = app;
