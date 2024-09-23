@@ -34,9 +34,12 @@ app.get('/contacts/:id', async (req, res) => {
             WHERE contacts.id = $1;
         `;
         const result = await db.query(query, [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Contact not found' });
+        }
         res.json(result.rows[0]);
     } catch (e) {
-        return res.status(400).json({ e });
+        return res.status(400).json({ error: 'Something went wrong, please try again.' });
     }
 });
 
@@ -52,7 +55,7 @@ app.post('/contacts', async (req, res) => {
 
         res.status(201).json({ message: 'Contact added successfully' });
     } catch (e) {
-        return res.status(400).json({ e });
+        return res.status(400).json({ error: 'Something went wrong, please try again.' });
     }
 });
 
@@ -72,7 +75,7 @@ app.put('/contacts/:id', async (req, res) => {
         res.json({ message: 'Contact updated successfully' });
 
     } catch (e) {
-        return res.status(400).json({ e });
+        return res.status(400).json({ error: 'Something went wrong, please try again.' });
     }
 })
 
@@ -84,7 +87,7 @@ app.delete('/contacts/:id', async (req, res) => {
         await db.query('DELETE FROM contacts WHERE id = $1', [id]);
         res.json({ message: 'Contact deleted successfully' });
     } catch (e) {
-        return res.status(400).json({ e });
+        return res.status(400).json({ error: 'Something went wrong, please try again.' });
     }
 })
 
