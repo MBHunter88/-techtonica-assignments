@@ -43,21 +43,31 @@ app.get('/contacts/:id', async (req, res) => {
     }
 });
 
-//endpoint to add new contact
+// Endpoint to add new contact
 app.post('/contacts', async (req, res) => {
     try {
         const { name, email, phone, notes, address, city, state } = req.body;
-        const contactQuery = 'INSERT INTO contacts (name, email, phone, notes) VALUES ($1, $2, $3, $4) RETURNING id';
+
+        const contactQuery = 'INSERT INTO contacts (name, email, phone, notes) VALUES ($1, $2, $3, $4) RETURNING *';
         const contactResult = await db.query(contactQuery, [name, email, phone, notes]);
 
-        const locationQuery = 'INSERT INTO locations (contact_id, address, city, state) VALUES ($1, $2, $3, $4)';
-        await db.query(locationQuery, [contactResult.rows[0].id, address, city, state]);
+        const locationQuery = 'INSERT INTO locations (contact_id, address, city, state) VALUES ($1, $2, $3, $4) RETURNING *';
+        const locationResult = await db.query(locationQuery, [contactResult.rows[0].id, address, city, state]);
 
-        res.status(201).json({ message: 'Contact added successfully' });
+        const newContact = {
+            ...contactResult.rows[0],
+            address: locationResult.rows[0].address,
+            city: locationResult.rows[0].city,
+            state: locationResult.rows[0].state,
+        };
+
+        res.status(201).json(newContact); 
     } catch (e) {
+        console.error(e);
         return res.status(400).json({ error: 'Something went wrong, please try again.' });
     }
 });
+
 
 
 //endpoint to edit contact

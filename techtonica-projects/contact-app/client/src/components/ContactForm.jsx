@@ -28,6 +28,8 @@ const formReducer = (state, action) => {
                 editing: true,      // Set editing mode to true
                 contactId: action.contact.id,
             };
+            case 'RESET_FORM':
+            return initialState;
         default:
             return state;
     }
@@ -55,7 +57,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
             setContactDetails(state); 
         } else {
             await addContact(state); // Add new contact
-           
+            dispatch({ type: 'RESET_FORM' });
         }
        
     };

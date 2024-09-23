@@ -32,20 +32,21 @@ const Contacts = () => {
     }, []);
 
     // Add new contact
-    const addContact = async (newContact) => {
-        const response = await fetch('/contacts', {
+    const addContact = async (formInput) => {
+        const response = await fetch('http://localhost:8080/contacts', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newContact),
+            body: JSON.stringify(formInput),
         });
-        const data = await response.json();
-        setContacts([...contacts, data]);
+        const newContact = await response.json();
+        console.log('New contact added:', newContact);
+        setContacts([...contacts, newContact]);
     };
 
 
     // Delete contact
     const deleteContact = async (id) => {
-        await fetch(`/contacts/${id}`, { method: 'DELETE' });
+        await fetch(`http://localhost:8080/contacts/${id}`, { method: 'DELETE' });
         setContacts(contacts.filter(contact => contact.id !== id));
     }
     const handleViewDetails = (id) => {
@@ -64,7 +65,7 @@ const Contacts = () => {
         <div>
           {selectedContactId == null && (
             <div className="button-container">
-                <ContactForm addContact={addContact} />
+                <ContactForm addContact={addContact}  />
             </div>
         )}
              {!selectedContactId ? (
