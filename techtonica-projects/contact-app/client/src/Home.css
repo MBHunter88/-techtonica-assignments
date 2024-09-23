@@ -1,0 +1,12 @@
+.Home {
+  min-height: 100vh;
+  background-color: rgb(238, 232, 232);
+  margin: 5px;
+}
+
+.mybody {
+  display: flex;
+  gap: 3em;
+  padding: 1em;
+}
+
