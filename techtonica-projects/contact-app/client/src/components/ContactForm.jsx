@@ -4,7 +4,8 @@ import {formReducer, initialState } from '../helpers/formReducer.js';
 // Form component for adding or editing contact
 const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetails }) => {
     const [state, dispatch] = useReducer(formReducer, initialState);
-
+    
+   
     // Handle input changes
     const handleInputChange = (e) => {
         dispatch({
@@ -13,6 +14,8 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
             value: e.target.value
         });
     };
+
+  
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -35,7 +38,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
     }, [contactToEdit]);
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='add-contact-form' onSubmit={handleSubmit}>
             <input
                 type="text"
                 name="name"
@@ -89,7 +92,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
                 onChange={handleInputChange}
                 placeholder="Notes"
             />
-            <button type="submit">{state.editing ? 'Update Contact' : 'Add Contact'}</button>
+            <button className='add-update-btn' type="submit">{state.editing ? 'Update Contact' : 'Add Contact'}</button>
         </form>
     );
 };

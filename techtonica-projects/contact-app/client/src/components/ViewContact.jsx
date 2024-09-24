@@ -65,7 +65,7 @@ const ViewContact = ({ contactId, setSelectedContactId }) => {
     }
 
     return (
-        <div>
+        <div className='contact-details-container'>
             <ul>
                 <li><p>Name: {contactDetails.name}</p></li>
                 <li><p>Email: {contactDetails.email}</p></li>
@@ -77,7 +77,7 @@ const ViewContact = ({ contactId, setSelectedContactId }) => {
             </ul>
             {/* Pass the updateContact function and the current contact details to ContactForm */}
             <ContactForm updateContact={updateContact} contactToEdit={contactDetails} setContactDetails={setContactDetails}  />
-            <button onClick={() => setSelectedContactId(null)}>Back</button>
+            <button className='back-btn 'onClick={() => setSelectedContactId(null)}>Back</button>
         </div>
     );
 }

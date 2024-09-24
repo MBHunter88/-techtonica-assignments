@@ -8,6 +8,7 @@ const Contacts = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedContactId, setSelectedContactId] = useState(null);
+    const [searchInput, setSearchInput] = useState('')
 
     
 
@@ -30,6 +31,10 @@ const Contacts = () => {
 
         fetchContacts();
     }, []);
+
+    const filteredContacts = contacts.filter(contact => 
+        contact.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
 
     // Add new contact
     const addContact = async (formInput) => {
@@ -63,6 +68,18 @@ const Contacts = () => {
 
     return (
         <div>
+            {selectedContactId == null && (
+        <div className='search-form'>
+            <form>
+          <input
+            type="text"
+            placeholder="Search contact name..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)} 
+          />
+          </form><br/>
+        </div>
+      )}
           {selectedContactId == null && (
             <div className="button-container">
                 <ContactForm addContact={addContact}  />
@@ -70,13 +87,13 @@ const Contacts = () => {
         )}
              {!selectedContactId ? (
                 <ul className='contacts-list'>
-                    {contacts.map(contact => (
+                    {filteredContacts.map(contact => (
                         <li key={contact.id} className='contact-item'>
                             <p>Name: {contact.name}</p>
                             <p>Email: {contact.email}</p>
                             <p>Phone: {contact.phone}</p>
-                            <button onClick={() => handleViewDetails(contact.id)}>View Details</button>
-                            <button onClick={() => deleteContact(contact.id)}>Delete</button>
+                            <button className='details-btn' onClick={() => handleViewDetails(contact.id)}>View Details</button>
+                            <button className='delete-btn' onClick={() => deleteContact(contact.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>
