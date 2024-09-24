@@ -113,10 +113,10 @@ The app is fully responsive and adapts to different screen sizes using media que
 Some challenges I encountered during development included:
 - Handling form validation and ensuring a smooth user experience with error messages.
 - Implementing the search functionality to efficiently filter contacts in real time.
-- Time constraints: this app was built with the help of previoulsy used code due to a 2-day time constraint.
+- Time constraints: this app was built with the help of previously used code due to a 2-day time constraint.
 
 ## Future Improvements
-- Add more advanced form validation.
+- Add more advanced form validation including error modals for incomplete submissions and integer validation for phone input. 
 - Implement sorting or filtering options based on additional criteria.
 
 ## License

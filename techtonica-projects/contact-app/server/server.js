@@ -22,7 +22,7 @@ app.get('/contacts', async (req, res) => {
     }
 });
 
-//endpoint for indivual contact with details by id (join query)
+//endpoint for individual contact with details by id (join query)
 app.get('/contacts/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -39,7 +39,11 @@ app.get('/contacts/:id', async (req, res) => {
         }
         res.json(result.rows[0]);
     } catch (e) {
-        return res.status(400).json({ error: 'Something went wrong, please try again.' });
+        return res.status(400).json({ 
+            error: 'Something went wrong, please try again.',
+            message: e.message,
+            operation: 'PUT /contacts/:id'
+        });
     }
 });
 
