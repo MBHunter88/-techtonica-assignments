@@ -1,10 +1,10 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import {formReducer, initialState } from '../helpers/formReducer.js';
 
 // Form component for adding or editing contact
 const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetails }) => {
     const [state, dispatch] = useReducer(formReducer, initialState);
-    
+    const [formErrors, setFormErrors] = useState({});
    
     // Handle input changes
     const handleInputChange = (e) => {
@@ -16,11 +16,23 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
     };
 
   
+    // validation of name input before submission
+    const validateForm = () => {
+        const errors = {};
+        if (!state.name) errors.name = 'Name is required';
+        return errors;
+    };
 
     // Handle form submission
     const handleSubmit = async (e) => {
         console.log('Submitting form with state:', state);
         e.preventDefault();
+        const errors = validateForm();
+        setFormErrors(errors);
+        // If there are validation errors, do not submit the form
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
         if (state.editing) {
             await updateContact(state.contactId, state); // Update contact
             setContactDetails(state); 
@@ -45,8 +57,8 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
                 value={state.name}
                 onChange={handleInputChange}
                 placeholder="Name"
-                required
             />
+            {formErrors.name && <p style={{ color: 'red' }}>{formErrors.name}</p>}
             <input
                 type="email"
                 name="email"
@@ -55,6 +67,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
                 placeholder="Email"
                 required
             />
+            
             <input
                 type="tel"
                 name="phone"
@@ -62,6 +75,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
                 onChange={handleInputChange}
                 placeholder="Phone"
             />
+            
              <input
                 type="text"
                 name="address"
