@@ -5,6 +5,11 @@ body {
   padding: 0;
 }
 
+h1 {
+  font-size: 45px;
+  text-align: center;
+}
+
 .contacts-form-container {
   display: flex;
   justify-content: space-between;
