@@ -57,6 +57,7 @@ const ContactForm = ({ addContact, updateContact, contactToEdit, setContactDetai
                 value={state.name}
                 onChange={handleInputChange}
                 placeholder="Name"
+                required
             />
             {formErrors.name && <p style={{ color: 'red' }}>{formErrors.name}</p>}
             <input
