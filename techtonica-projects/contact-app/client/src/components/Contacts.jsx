@@ -10,7 +10,7 @@ const Contacts = () => {
     const [selectedContactId, setSelectedContactId] = useState(null);
     const [searchInput, setSearchInput] = useState('')
 
-    
+
 
     //fetch contacts on page load
     useEffect(() => {
@@ -32,9 +32,9 @@ const Contacts = () => {
         fetchContacts();
     }, []);
 
-    const filteredContacts = contacts.filter(contact => 
+    const filteredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(searchInput.toLowerCase())
-      );
+    );
 
     // Add new contact
     const addContact = async (formInput) => {
@@ -68,43 +68,47 @@ const Contacts = () => {
 
     return (
         <div>
-            {selectedContactId == null && (
-        <div className='search-form'>
-            <form>
-          <input
-            type="text"
-            placeholder="Search contact name..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)} 
-          />
-          </form><br/>
-        </div>
-      )}
-          {selectedContactId == null && (
-            <div className="button-container">
-                <ContactForm addContact={addContact}  />
+            <div className='search-form'>
+                <form>
+                    <input
+                        type="text"
+                        placeholder="Search contact name..."
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                    />
+                </form>
             </div>
-        )}
-             {!selectedContactId ? (
-                <ul className='contacts-list'>
-                    {filteredContacts.map(contact => (
-                        <li key={contact.id} className='contact-item'>
-                            <p>Name: {contact.name}</p>
-                            <p>Email: {contact.email}</p>
-                            <p>Phone: {contact.phone}</p>
-                            <button className='details-btn' onClick={() => handleViewDetails(contact.id)}>View Details</button>
-                            <button className='delete-btn' onClick={() => deleteContact(contact.id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
-                
-            ) : (
-                <ViewContact contactId={selectedContactId}
-                setSelectedContactId={setSelectedContactId}
-                setContacts={setContacts} />
-            )}
-           
+
+            <div className="contacts-form-container">
+                {selectedContactId == null && (
+                    <div className="contacts-list-container">
+                        <ul className='contacts-list'>
+                            {filteredContacts.map(contact => (
+                                <li key={contact.id} className='contact-item'>
+                                    <p>Name: {contact.name}</p>
+                                    <p>Email: {contact.email}</p>
+                                    <p>Phone: {contact.phone}</p>
+                                    <button className='details-btn' onClick={() => handleViewDetails(contact.id)}>View Details</button>
+                                    <button className='delete-btn' onClick={() => deleteContact(contact.id)}>Delete</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                {selectedContactId == null && (
+                    <div className="form-container">
+                        <ContactForm addContact={addContact} />
+                    </div>
+                )}
+                {selectedContactId != null && (
+                    <ViewContact contactId={selectedContactId}
+                        setSelectedContactId={setSelectedContactId}
+                        setContacts={setContacts} />
+                )}
+            </div>
         </div>
+
+
     );
 }
 

@@ -65,20 +65,23 @@ const ViewContact = ({ contactId, setSelectedContactId }) => {
     }
 
     return (
-        <div className='contact-details-container'>
-            <ul>
-                <li><p>Name: {contactDetails.name}</p></li>
-                <li><p>Email: {contactDetails.email}</p></li>
-                <li><p>Phone: {contactDetails.phone}</p></li>
-                <li><p>Address: {contactDetails.address}</p></li>
-                <li><p>City: {contactDetails.city}</p></li>
-                <li><p>State: {contactDetails.state}</p></li>
-                <li><p>Notes: {contactDetails.notes}</p></li>
-            </ul>
-            {/* Pass the updateContact function and the current contact details to ContactForm */}
-            <ContactForm updateContact={updateContact} contactToEdit={contactDetails} setContactDetails={setContactDetails}  />
-            <button className='back-btn 'onClick={() => setSelectedContactId(null)}>Back</button>
-        </div>
+        <div className="contacts-form-container">
+    <div className='contacts-list-container'>
+        <ul className='contacts-list contact-item'>
+            <li><p>Name: {contactDetails.name}</p></li>
+            <li><p>Email: {contactDetails.email}</p></li>
+            <li><p>Phone: {contactDetails.phone}</p></li>
+            <li><p>Address: {contactDetails.address}</p></li>
+            <li><p>City: {contactDetails.city}</p></li>
+            <li><p>State: {contactDetails.state}</p></li>
+            <li><p>Notes: {contactDetails.notes}</p></li>
+        </ul>
+    </div>
+    <div className="form-container">
+        <ContactForm updateContact={updateContact} contactToEdit={contactDetails} setContactDetails={setContactDetails} />
+    </div>
+    <button className="back-btn" onClick={() => setSelectedContactId(null)}>Back</button>
+</div>
     );
 }
 
