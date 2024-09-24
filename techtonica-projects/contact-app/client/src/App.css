@@ -1,6 +1,6 @@
 .App {
   min-height: 100vh;
-  background-color: rgb(238, 232, 232);
+  background-color: rgb(255, 255, 255);
   margin: 5px;
 }
 
@@ -10,3 +10,32 @@
   padding: 1em;
 }
 
+.contact-item {
+  /* text-align: center; */
+  border: solid black;
+  margin: 0 auto;
+  margin-top: 1em;
+  padding: 1em;
+  max-width: 50%;
+  font-size: 1rem;
+  list-style: none;
+}
+
+button {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 5px;
+  background-color: lightblue;
+  border-color: lightblue;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+form input {
+  height: 30px;
+}

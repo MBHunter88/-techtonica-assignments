@@ -69,14 +69,15 @@ const Contacts = () => {
             </div>
         )}
              {!selectedContactId ? (
-                <ul>
+                <ul className='contacts-list'>
                     {contacts.map(contact => (
-                        <><li key={contact.id}>
+                        <li key={contact.id} className='contact-item'>
                             <p>Name: {contact.name}</p>
                             <p>Email: {contact.email}</p>
                             <p>Phone: {contact.phone}</p>
                             <button onClick={() => handleViewDetails(contact.id)}>View Details</button>
-                        </li><button onClick={() => deleteContact(contact.id)}>Delete</button></>
+                            <button onClick={() => deleteContact(contact.id)}>Delete</button>
+                        </li>
                     ))}
                 </ul>
                 

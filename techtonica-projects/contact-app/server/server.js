@@ -101,6 +101,21 @@ app.delete('/contacts/:id', async (req, res) => {
     }
 })
 
+//enpoint to search for contacts based on user input
+app.get('/search', async (req, res) => {
+    try{
+        const { input } = req.query
+        if (!input) {
+            return res.status(400).json({ error: 'Search input is required' });
+          }
+        const searchQuery = `SELECT * FROM contacts WHERE name LIKE $1`
+        const searchInput = `%${input}%`
+        const result = await db.query(searchQuery, [searchInput]);
+        res.json(result.rows)
+    } catch (e) {
+        return res.status(404).json({error: 'Contact not found'})
+    }
+})
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
